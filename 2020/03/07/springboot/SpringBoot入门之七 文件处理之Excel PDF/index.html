@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot入门之七 文件处理之Excel PDF  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="SpringBoot入门之七 文件处理之Excel PDF  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="contact me">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/contact-me/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:02:30.000Z">
+<meta property="article:modified_time" content="2020-04-03T08:02:31.009Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(10)</small></div></li>
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="10">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/SpringBoot入门之七 文件处理之Excel PDF" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SpringBoot入门之七 文件处理之Excel PDF </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-04-03 16:57:30'>2020-03-07 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合EasyExcel"><span class="toc-text">1. 整合EasyExcel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-引入依赖"><span class="toc-text">1.1 引入依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2、实体类"><span class="toc-text">1.2、实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-工具方法"><span class="toc-text">1.3 工具方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-业务服务类"><span class="toc-text">1.4 业务服务类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-测试类"><span class="toc-text">1.5 测试类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-整合itext-pdf文件处理"><span class="toc-text">2. 整合itext pdf文件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-引入pom"><span class="toc-text">2.1 引入pom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-controller源码"><span class="toc-text">2.2 controller源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-application-properties"><span class="toc-text">2.3 application.properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-用freemark解析的文件模板"><span class="toc-text">2.4 用freemark解析的文件模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址-1"><span class="toc-text">源码地址</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合EasyExcel"><span class="toc-text">1. 整合EasyExcel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-引入依赖"><span class="toc-text">1.1 引入依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2、实体类"><span class="toc-text">1.2、实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-工具方法"><span class="toc-text">1.3 工具方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-业务服务类"><span class="toc-text">1.4 业务服务类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-测试类"><span class="toc-text">1.5 测试类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-整合itext-pdf文件处理"><span class="toc-text">2. 整合itext pdf文件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-引入pom"><span class="toc-text">2.1 引入pom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-controller源码"><span class="toc-text">2.2 controller源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-application-properties"><span class="toc-text">2.3 application.properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-用freemark解析的文件模板"><span class="toc-text">2.4 用freemark解析的文件模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址-1"><span class="toc-text">源码地址</span></a></li></ol></li></ol></div>(SpringBoot入门之七 文件处理之Excel PDF)</p>
+<h1 id="1-整合EasyExcel"><a href="#1-整合EasyExcel" class="headerlink" title="1. 整合EasyExcel"></a>1. 整合EasyExcel</h1><p>easyexcel是阿里开源的解析excel的工具,可以把它看作对poi的优化版。</p>
+<p>Java解析、生成Excel比较有名的框架有Apache poi、jxl。但他们都存在一个严重的问题就是非常的耗内存，poi有一套SAX模式的API可以一定程度的解决一些内存溢出的问题，但POI还是有一些缺陷，比如07版Excel解压缩以及解压后存储都是在内存中完成的，内存消耗依然很大。easyexcel重写了poi对07版Excel的解析，能够原本一个3M的excel用POI sax依然需要100M左右内存降低到KB级别，并且再大的excel不会出现内存溢出，03版依赖POI的sax模式。在上层做了模型转换的封装，让使用者更加简单方便。</p>
+<h2 id="1-1-引入依赖"><a href="#1-1-引入依赖" class="headerlink" title="1.1 引入依赖"></a>1.1 引入依赖</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">	 &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;</span><br><span class="line">	 &lt;version&gt;1.1.2-beta5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2、实体类"><a href="#1-2、实体类" class="headerlink" title="1.2、实体类"></a>1.2、实体类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="keyword">extends</span> <span class="title">BaseRowModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExcelProperty</span>(value = <span class="string">"书名"</span>, index = <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExcelProperty</span>(value = <span class="string">"编号"</span>, index = <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExcelProperty</span>(value = <span class="string">"价格"</span>, index = <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer price;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name, String code, Integer price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-工具方法"><a href="#1-3-工具方法" class="headerlink" title="1.3 工具方法"></a>1.3 工具方法</h2><p>EasyExcelListener</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EasyExcelListener</span> <span class="keyword">extends</span> <span class="title">AnalysisEventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义用于暂时存储data。 可以通过实例获取该值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Object&gt; datas = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过 AnalysisContext 对象还可以获取当前 sheet，当前行等数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">(Object object, AnalysisContext context)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数据存储到list，供批量处理，或后续自己业务逻辑处理。</span></span><br><span class="line">        datas.add(object);</span><br><span class="line">        <span class="comment">// 根据业务自行 do something</span></span><br><span class="line">        doSomething();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        如数据过大，可以进行定量分批处理</span></span><br><span class="line"><span class="comment">        if(datas.size()&lt;=100)&#123;</span></span><br><span class="line"><span class="comment">            datas.add(object);</span></span><br><span class="line"><span class="comment">        &#125;else &#123;</span></span><br><span class="line"><span class="comment">            doSomething();</span></span><br><span class="line"><span class="comment">            datas = new ArrayList&lt;Object&gt;();</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据业务自行实现该方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterAllAnalysed</span><span class="params">(AnalysisContext context)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            datas.clear();</span></span><br><span class="line"><span class="comment">            解析结束销毁不用的资源</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>EasyExcelUtil</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EasyExcelUtil</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取 Excel(多个 sheet)</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> excel 文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rowModel 实体类映射，继承 BaseRowModel 类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Excel 数据 list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Object&gt; <span class="title">readExcel</span><span class="params">(MultipartFile excel, BaseRowModel rowModel)</span> </span>&#123;</span><br><span class="line">        EasyExcelListener EasyExcelListener = <span class="keyword">new</span> EasyExcelListener();</span><br><span class="line">        ExcelReader reader = getReader(excel, EasyExcelListener);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (reader == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Sheet sheet : reader.getSheets()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (rowModel != <span class="keyword">null</span>) &#123;</span><br><span class="line">                sheet.setClazz(rowModel.getClass());</span><br><span class="line">            &#125;</span><br><span class="line">            reader.read(sheet);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> EasyExcelListener.getDatas();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取某个 sheet 的 Excel</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> excel 文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rowModel 实体类映射，继承 BaseRowModel 类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetNo sheet 的序号 从1开始</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Excel 数据 list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Object&gt; <span class="title">readExcel</span><span class="params">(MultipartFile excel, BaseRowModel rowModel, <span class="keyword">int</span> sheetNo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> readExcel(excel, rowModel, sheetNo, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取某个 sheet 的 Excel</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> excel 文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rowModel 实体类映射，继承 BaseRowModel 类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetNo sheet 的序号 从1开始</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> headLineNum 表头行数，默认为1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Excel 数据 list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Object&gt; <span class="title">readExcel</span><span class="params">(MultipartFile excel, BaseRowModel rowModel, <span class="keyword">int</span> sheetNo, <span class="keyword">int</span> headLineNum)</span> </span>&#123;</span><br><span class="line">        EasyExcelListener EasyExcelListener = <span class="keyword">new</span> EasyExcelListener();</span><br><span class="line">        ExcelReader reader = getReader(excel, EasyExcelListener);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (reader == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        reader.read(<span class="keyword">new</span> Sheet(sheetNo, headLineNum, rowModel.getClass()));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> EasyExcelListener.getDatas();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 导出 Excel ：一个 sheet，带表头</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response HttpServletResponse</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list 数据 list，每个元素为一个 BaseRowModel</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName 导出的文件名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetName 导入文件的 sheet 名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object 映射实体类，Excel 模型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeExcel</span><span class="params">(HttpServletResponse response, List&lt;? extends BaseRowModel&gt; list, String fileName,</span></span></span><br><span class="line"><span class="function"><span class="params">        String sheetName, BaseRowModel object)</span> </span>&#123;</span><br><span class="line">        ExcelWriter writer = <span class="keyword">new</span> ExcelWriter(getOutputStream(fileName, response), ExcelTypeEnum.XLSX);</span><br><span class="line">        Sheet sheet = <span class="keyword">new</span> Sheet(<span class="number">1</span>, <span class="number">0</span>, object.getClass());</span><br><span class="line">        sheet.setSheetName(sheetName);</span><br><span class="line"></span><br><span class="line">        TableStyle tableStyle = <span class="keyword">new</span> TableStyle();</span><br><span class="line">        tableStyle.setTableContentBackGroundColor(IndexedColors.WHITE);</span><br><span class="line">        Font font = <span class="keyword">new</span> Font();</span><br><span class="line">        font.setFontHeightInPoints((<span class="keyword">short</span>)<span class="number">9</span>);</span><br><span class="line">        tableStyle.setTableHeadFont(font);</span><br><span class="line">        tableStyle.setTableContentFont(font);</span><br><span class="line">        sheet.setTableStyle(tableStyle);</span><br><span class="line"></span><br><span class="line">        writer.write(list, sheet);</span><br><span class="line">        writer.finish();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 导出 Excel ：多个 sheet，带表头</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response HttpServletResponse</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list 数据 list，每个元素为一个 BaseRowModel</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName 导出的文件名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetName 导入文件的 sheet 名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object 映射实体类，Excel 模型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EasyExcelWriterFactory <span class="title">writeExcelWithSheets</span><span class="params">(HttpServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">        List&lt;? extends BaseRowModel&gt; list, String fileName, String sheetName, BaseRowModel object)</span> </span>&#123;</span><br><span class="line">        EasyExcelWriterFactory writer =</span><br><span class="line">            <span class="keyword">new</span> EasyExcelWriterFactory(getOutputStream(fileName, response), ExcelTypeEnum.XLSX);</span><br><span class="line">        Sheet sheet = <span class="keyword">new</span> Sheet(<span class="number">1</span>, <span class="number">0</span>, object.getClass());</span><br><span class="line">        sheet.setSheetName(sheetName);</span><br><span class="line">        sheet.setTableStyle(getTableStyle());</span><br><span class="line">        writer.write(list, sheet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> writer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 导出融资还款情况表</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeFinanceRepayment</span><span class="params">(HttpServletResponse response, List&lt;? extends BaseRowModel&gt; list,</span></span></span><br><span class="line"><span class="function"><span class="params">        String fileName, String sheetName, BaseRowModel object)</span> </span>&#123;</span><br><span class="line">        ExcelWriter writer = <span class="keyword">new</span> ExcelWriter(getOutputStream(fileName, response), ExcelTypeEnum.XLSX);</span><br><span class="line">        Sheet sheet = <span class="keyword">new</span> Sheet(<span class="number">1</span>, <span class="number">0</span>, object.getClass());</span><br><span class="line">        sheet.setSheetName(sheetName);</span><br><span class="line">        sheet.setTableStyle(getTableStyle());</span><br><span class="line">        writer.write(list, sheet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= list.size(); i += <span class="number">4</span>) &#123;</span><br><span class="line">            writer.merge(i, i + <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            writer.merge(i, i + <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.finish();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 导出文件时为Writer生成OutputStream</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> OutputStream <span class="title">getOutputStream</span><span class="params">(String fileName, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建本地文件</span></span><br><span class="line">        fileName = fileName + <span class="string">".xls"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fileName = <span class="keyword">new</span> String(fileName.getBytes(), <span class="string">"ISO-8859-1"</span>);</span><br><span class="line">            response.addHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"filename="</span> + fileName);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> response.getOutputStream();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"导出异常！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回 ExcelReader</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> excel 需要解析的 Excel 文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> EasyExcelListener new EasyExcelListener()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ExcelReader <span class="title">getReader</span><span class="params">(MultipartFile excel, EasyExcelListener EasyExcelListener)</span> </span>&#123;</span><br><span class="line">        String filename = excel.getOriginalFilename();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (filename == <span class="keyword">null</span></span><br><span class="line">            || (!filename.toLowerCase().endsWith(<span class="string">".xls"</span>) &amp;&amp; !filename.toLowerCase().endsWith(<span class="string">".xlsx"</span>))) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"文件格式错误！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        InputStream inputStream;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            inputStream = <span class="keyword">new</span> BufferedInputStream(excel.getInputStream());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ExcelReader(inputStream, <span class="keyword">null</span>, EasyExcelListener, <span class="keyword">false</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 资金收支导出 Excel ：一个 sheet，带表头</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response HttpServletResponse</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list 数据 list，每个元素为一个 BaseRowModel</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName 导出的文件名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetName 导入文件的 sheet 名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object 映射实体类，Excel 模型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exportFundBudgetExcel</span><span class="params">(HttpServletResponse response, List&lt;? extends BaseRowModel&gt; list,</span></span></span><br><span class="line"><span class="function"><span class="params">        String fileName, String sheetName, BaseRowModel object)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ExcelWriter writer = <span class="keyword">new</span> ExcelWriter(getOutputStream(fileName, response), ExcelTypeEnum.XLSX);</span><br><span class="line">        Sheet sheet = <span class="keyword">new</span> Sheet(<span class="number">1</span>, <span class="number">0</span>, object.getClass());</span><br><span class="line">        sheet.setSheetName(sheetName);</span><br><span class="line">        sheet.setTableStyle(getTableStyle());</span><br><span class="line"></span><br><span class="line">        writer.write(list, sheet);</span><br><span class="line">        writer.merge(<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        writer.merge(<span class="number">4</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        writer.merge(<span class="number">14</span>, <span class="number">14</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        writer.finish();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取Excel表格数据，封装成实体</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> inputStream</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sheetNo</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> headLineMun</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">readExcel</span><span class="params">(InputStream inputStream, ExcelTypeEnum excelType,</span></span></span><br><span class="line"><span class="function"><span class="params">        Class&lt;? extends BaseRowModel&gt; clazz, Integer sheetNo, Integer headLineMun)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == inputStream) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"the inputStream is null!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        EasyExcelListener listener = <span class="keyword">new</span> EasyExcelListener();</span><br><span class="line">        ExcelReader reader = <span class="keyword">new</span> ExcelReader(inputStream, excelType, <span class="keyword">null</span>, listener);</span><br><span class="line">        reader.read(<span class="keyword">new</span> Sheet(sheetNo, headLineMun, clazz));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> listener.getDatas();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">readExcel</span><span class="params">(InputStream inputStream, ExcelTypeEnum excelType,</span></span></span><br><span class="line"><span class="function"><span class="params">        Class&lt;? extends BaseRowModel&gt; clazz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == inputStream) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"the inputStream is null!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        EasyExcelListener listener = <span class="keyword">new</span> EasyExcelListener();</span><br><span class="line">        ExcelReader reader = <span class="keyword">new</span> ExcelReader(inputStream, excelType, <span class="keyword">null</span>, listener);</span><br><span class="line">        <span class="comment">// reader.read(new Sheet(sheetNo, headLineMun, clazz));</span></span><br><span class="line">        <span class="keyword">for</span> (Sheet sheet : reader.getSheets()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (clazz != <span class="keyword">null</span>) &#123;</span><br><span class="line">                sheet.setClazz(clazz);</span><br><span class="line">            &#125;</span><br><span class="line">            reader.read(sheet);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> listener.getDatas();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据输入流，判断为xls还是xlsx，该方法原本存在于easyexcel 1.1.0 的ExcelTypeEnum中。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExcelTypeEnum <span class="title">valueOf</span><span class="params">(InputStream inputStream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileMagic fileMagic = FileMagic.valueOf(inputStream);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (FileMagic.OLE2.equals(fileMagic)) &#123;</span><br><span class="line">                <span class="keyword">return</span> ExcelTypeEnum.XLS;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (FileMagic.OOXML.equals(fileMagic)) &#123;</span><br><span class="line">                <span class="keyword">return</span> ExcelTypeEnum.XLSX;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"excelTypeEnum can not null"</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置全局样式</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> TableStyle <span class="title">getTableStyle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        TableStyle tableStyle = <span class="keyword">new</span> TableStyle();</span><br><span class="line"></span><br><span class="line">        tableStyle.setTableContentBackGroundColor(IndexedColors.WHITE);</span><br><span class="line">        Font font = <span class="keyword">new</span> Font();</span><br><span class="line">        font.setBold(<span class="keyword">true</span>);</span><br><span class="line">        font.setFontHeightInPoints((<span class="keyword">short</span>)<span class="number">9</span>);</span><br><span class="line">        tableStyle.setTableHeadFont(font);</span><br><span class="line">        Font fontContent = <span class="keyword">new</span> Font();</span><br><span class="line">        fontContent.setFontHeightInPoints((<span class="keyword">short</span>)<span class="number">9</span>);</span><br><span class="line">        tableStyle.setTableContentFont(fontContent);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tableStyle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>EasyExcelWriterFactory</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EasyExcelWriterFactory</span> <span class="keyword">extends</span> <span class="title">ExcelWriter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> OutputStream outputStream;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sheetNo = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EasyExcelWriterFactory</span><span class="params">(OutputStream outputStream, ExcelTypeEnum typeEnum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(outputStream, typeEnum);</span><br><span class="line">        <span class="keyword">this</span>.outputStream = outputStream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EasyExcelWriterFactory <span class="title">write</span><span class="params">(List&lt;? extends BaseRowModel&gt; list, String sheetName, BaseRowModel object)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sheetNo++;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Sheet sheet = <span class="keyword">new</span> Sheet(sheetNo, <span class="number">0</span>, object.getClass());</span><br><span class="line">            sheet.setSheetName(sheetName);</span><br><span class="line">            <span class="keyword">this</span>.write(list, sheet);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                outputStream.flush();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finish();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            outputStream.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-业务服务类"><a href="#1-4-业务服务类" class="headerlink" title="1.4 业务服务类"></a>1.4 业务服务类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Book&gt; <span class="title">readBookSheet</span><span class="params">(InputStream inputStream, ExcelTypeEnum excelType)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Object datas = EasyExcelUtil.readExcel(inputStream, excelType, Book<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (datas.getClass().equals(ArrayList<span class="class">.<span class="keyword">class</span>)) </span>&#123;</span><br><span class="line">                List&lt;Book&gt; result = (List&lt;Book&gt;)datas;</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-5-测试类"><a href="#1-5-测试类" class="headerlink" title="1.5 测试类"></a>1.5 测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">SpringBootTest</span></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SpringbootTeach7ApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BookService bookService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readBookByEasyexcel</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        InputStream inputStream = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"C:\\Users\\indexvc\\Downloads\\20200312\\test1.xlsx"</span>));</span><br><span class="line">        <span class="comment">// Object book = EasyExcelUtil.readExcel(inputStream, ExcelTypeEnum.XLSX, Book.class, 1, 2);</span></span><br><span class="line">        <span class="comment">// System.out.println(book);</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        List&lt;Book&gt; result = bookService.readBookSheet(inputStream, ExcelTypeEnum.XLSX);</span><br><span class="line">        result.stream().forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeBookByEasyexcel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 文件输出位置</span></span><br><span class="line">        OutputStream out = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            out = <span class="keyword">new</span> FileOutputStream(<span class="string">"C:\\Users\\indexvc\\Downloads\\20200312\\test1.xlsx"</span>);</span><br><span class="line">            ExcelWriter writer = EasyExcelFactory.getWriter(out);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写仅有一个 Sheet 的 Excel 文件, 此场景较为通用</span></span><br><span class="line">            Sheet sheet1 = <span class="keyword">new</span> Sheet(<span class="number">1</span>, <span class="number">0</span>, Book<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第一个 sheet 名称</span></span><br><span class="line">            sheet1.setSheetName(<span class="string">"sheet1"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写数据到 Writer 上下文中</span></span><br><span class="line">            <span class="comment">// 入参1: 数据库查询的数据list集合</span></span><br><span class="line">            <span class="comment">// 入参2: 要写入的目标 sheet</span></span><br><span class="line"></span><br><span class="line">            List&lt;Book&gt; bookList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">                Book book = Book.builder().name(<span class="string">"天龙八部"</span> + i).code(<span class="string">"1"</span>).price(i).build();</span><br><span class="line">                bookList.add(book);</span><br><span class="line">            &#125;</span><br><span class="line">            writer.write(bookList, sheet1);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将上下文中的最终 outputStream 写入到指定文件中</span></span><br><span class="line">            writer.finish();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 关闭流</span></span><br><span class="line">                out.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach7" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach7</a></p>
+<h1 id="2-整合itext-pdf文件处理"><a href="#2-整合itext-pdf文件处理" class="headerlink" title="2. 整合itext pdf文件处理"></a>2. 整合itext pdf文件处理</h1><h2 id="2-1-引入pom"><a href="#2-1-引入pom" class="headerlink" title="2.1 引入pom"></a>2.1 引入pom</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">      &lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.itextpdf/itextpdf --&gt;</span></span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;itextpdf&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;5.5.13&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.apache.pdfbox&lt;/groupId&gt;</span><br><span class="line">        	&lt;artifactId&gt;pdfbox&lt;/artifactId&gt;</span><br><span class="line">        	&lt;version&gt;1.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">      &lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.itextpdf.tool/xmlworker --&gt;</span></span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.itextpdf.tool&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;xmlworker&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;5.5.13&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;commons-io&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;commons-io&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">      &lt;!-- 加密 --&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.bouncycastle&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;bcprov-jdk15on&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.60&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-controller源码"><a href="#2-2-controller源码" class="headerlink" title="2.2 controller源码"></a>2.2 controller源码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PdfController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;DEST&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String dest;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;HTML&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String html;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Configuration freemarkerCfg;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createPdf</span><span class="params">(String content, String dest)</span> <span class="keyword">throws</span> IOException, DocumentException </span>&#123;</span><br><span class="line">        <span class="comment">// step 1</span></span><br><span class="line">        Document document = <span class="keyword">new</span> Document();</span><br><span class="line">        <span class="comment">// step 2</span></span><br><span class="line">        PdfWriter writer = PdfWriter.getInstance(document, <span class="keyword">new</span> FileOutputStream(dest));</span><br><span class="line">        <span class="comment">// step 3</span></span><br><span class="line">        document.open();</span><br><span class="line">        <span class="comment">// step 4</span></span><br><span class="line">        XMLWorkerFontProvider fontImp = <span class="keyword">new</span> XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);</span><br><span class="line">        XMLWorkerHelper.getInstance().parseXHtml(writer, document, <span class="keyword">new</span> ByteArrayInputStream(content.getBytes(<span class="string">"UTF-8"</span>)),</span><br><span class="line">            <span class="keyword">null</span>, Charset.forName(<span class="string">"UTF-8"</span>), fontImp);</span><br><span class="line">        <span class="comment">// step 5</span></span><br><span class="line">        document.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * freemarker渲染html</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">freeMarkerRender</span><span class="params">(Map&lt;String, Object&gt; data, String htmlTmp)</span> </span>&#123;</span><br><span class="line">        Writer out = <span class="keyword">new</span> StringWriter();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// Template template = freemarkerCfg.getTemplate(htmlTmp);</span></span><br><span class="line">            Template template = freemarkerCfg.getTemplate(htmlTmp, <span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将合并后的数据和模板写入到流中，这里使用的字符流</span></span><br><span class="line">            template.process(data, out);</span><br><span class="line">            out.flush();</span><br><span class="line">            <span class="keyword">return</span> out.toString();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">                ex.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"view-pdf"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showPdf</span><span class="params">(HttpServletResponse response)</span> <span class="keyword">throws</span> IOException, DocumentException </span>&#123;</span><br><span class="line">        <span class="comment">// 需要填充的数据</span></span><br><span class="line">        Map&lt;String, Object&gt; data = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">16</span>);</span><br><span class="line">        data.put(<span class="string">"name"</span>, <span class="string">"  robin"</span>);</span><br><span class="line"></span><br><span class="line">        String content = freeMarkerRender(data, html);</span><br><span class="line">        <span class="comment">// 创建pdf</span></span><br><span class="line">        createPdf(content, dest);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 读取pdf并预览</span></span><br><span class="line">        readPdf(response, dest);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取本地pdf,这里设置的是预览</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readPdf</span><span class="params">(HttpServletResponse response, String dest)</span> </span>&#123;</span><br><span class="line">        response.reset();</span><br><span class="line">        response.setContentType(<span class="string">"application/pdf"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            File file = <span class="keyword">new</span> File(dest);</span><br><span class="line">            FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            OutputStream outputStream = response.getOutputStream();</span><br><span class="line">            IOUtils.write(IOUtils.toByteArray(fileInputStream), outputStream);</span><br><span class="line">            response.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"inline; filename= file"</span>);</span><br><span class="line">            outputStream.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-application-properties"><a href="#2-3-application-properties" class="headerlink" title="2.3 application.properties"></a>2.3 application.properties</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8081</span></span><br><span class="line">DEST= target/HelloWorld.pdf</span><br><span class="line">HTML= pdf.ftl</span><br><span class="line"></span><br><span class="line">spring.freemarker.charset= UTF-<span class="number">8</span></span><br><span class="line">spring.freemarker.allow-request-override= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.cache= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.expose-request-attributes= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.expose-session-attributes= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.content-type= text/html</span><br><span class="line">spring.freemarker.template-loader-path= classpath:/templates/</span><br><span class="line">spring.freemarker.expose-spring-macro-helpers= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.check-template-location= <span class="keyword">true</span></span><br><span class="line">spring.freemarker.enabled= <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-4-用freemark解析的文件模板"><a href="#2-4-用freemark解析的文件模板" class="headerlink" title="2.4 用freemark解析的文件模板"></a>2.4 用freemark解析的文件模板</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>/&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body &#123;</span><br><span class="line">            font-family: SimHei;</span><br><span class="line">        &#125;</span><br><span class="line">        .pos &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            left: <span class="number">100</span>px;</span><br><span class="line">            top: <span class="number">150</span>px</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"blue pos"</span>&gt;</span><br><span class="line">    &lt;h1&gt;你好，$&#123;name&#125;&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">    &lt;h3&gt;hello  world&lt;/h3&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>执行启动文件 ，访问效果如下</p>
+<p><img src="https://img-blog.csdnimg.cn/20200319161650856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">## 2.5 pdf文件加水印 加密</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItextUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BaseFont <span class="title">baseFont</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BaseFont baseFont = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            baseFont = BaseFont.createFont(<span class="string">"/fonts/simhei.ttf"</span>, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> baseFont;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入图片水印</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> InPdfFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> outPdfFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> markImagePath</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pageSize</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addPdfMark</span><span class="params">(String InPdfFile, String outPdfFile, String markImagePath, <span class="keyword">int</span> pageSize)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        PdfReader reader = <span class="keyword">new</span> PdfReader(InPdfFile, <span class="string">"PDF"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">        PdfStamper stamp = <span class="keyword">new</span> PdfStamper(reader, <span class="keyword">new</span> FileOutputStream(outPdfFile));</span><br><span class="line"></span><br><span class="line">        Image img = Image.getInstance(markImagePath);<span class="comment">// 插入水印</span></span><br><span class="line"></span><br><span class="line">        img.setAbsolutePosition(<span class="number">90</span>, <span class="number">90</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= pageSize; i++) &#123;</span><br><span class="line">            PdfContentByte under = stamp.getUnderContent(i);</span><br><span class="line">            under.addImage(img);</span><br><span class="line">        &#125;</span><br><span class="line">        stamp.close();<span class="comment">// 关闭</span></span><br><span class="line">        File tempfile = <span class="keyword">new</span> File(InPdfFile);</span><br><span class="line">        <span class="keyword">if</span> (tempfile.exists()) &#123;</span><br><span class="line">            tempfile.delete();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入文字水印</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> inputFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> outputFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> waterMarkName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addPdfTextMark</span><span class="params">(String inputFile, String outputFile, String waterMarkName)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        addPdfTextMark(inputFile, outputFile, waterMarkName, <span class="string">"black"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入文本水印</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> inputFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> outputFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> waterMarkName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> color 文字颜色</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addPdfTextMark</span><span class="params">(String inputFile, String outputFile, String waterMarkName, String color)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        PdfReader reader;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            reader = <span class="keyword">new</span> PdfReader(inputFile);</span><br><span class="line"></span><br><span class="line">            File outputFileTemp = <span class="keyword">new</span> File(outputFile);</span><br><span class="line">            <span class="keyword">if</span> (outputFileTemp.exists()) &#123;</span><br><span class="line">                outputFileTemp.delete();</span><br><span class="line">                outputFileTemp.createNewFile();</span><br><span class="line">            &#125;</span><br><span class="line">            File parentFile = <span class="keyword">new</span> File(outputFileTemp.getParentFile().getAbsolutePath());</span><br><span class="line">            <span class="keyword">if</span> (!parentFile.exists()) &#123;</span><br><span class="line">                parentFile.mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            PdfStamper stamper;</span><br><span class="line">            stamper = <span class="keyword">new</span> PdfStamper(reader, <span class="keyword">new</span> FileOutputStream(outputFile));</span><br><span class="line"></span><br><span class="line">            addPdfTextMark(stamper, waterMarkName, color);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (DocumentException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"文件加水印失败"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加密</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> stamper</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> PdfStamper <span class="title">doEncryption</span><span class="params">(PdfStamper stamper)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String modifyPasswd = <span class="string">"123"</span>;</span><br><span class="line">        <span class="comment">// 读pdf无需密码 ， 修改pdf密码为 modifyPasswd=123</span></span><br><span class="line">        stamper.setEncryption(<span class="keyword">null</span>, modifyPasswd.getBytes(), PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_PRINTING,</span><br><span class="line">            PdfWriter.STANDARD_ENCRYPTION_128);</span><br><span class="line">        <span class="keyword">return</span> stamper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addPdfTextMark</span><span class="params">(PdfStamper stamper, String waterMarkName, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            doEncryption(stamper);</span><br><span class="line">            <span class="comment">// 设置字体</span></span><br><span class="line">            BaseFont base = ItextUtil.baseFont();</span><br><span class="line">            <span class="comment">// 获取总页数</span></span><br><span class="line">            <span class="keyword">int</span> total = stamper.getReader().getNumberOfPages() + <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 获取文件的页面的长和高</span></span><br><span class="line">            Document doc1 = <span class="keyword">new</span> Document(stamper.getReader().getPageSize(<span class="number">1</span>));</span><br><span class="line">            <span class="keyword">float</span> width = doc1.getPageSize().getWidth();</span><br><span class="line">            <span class="keyword">float</span> height = doc1.getPageSize().getHeight() + <span class="number">100</span>;</span><br><span class="line">            <span class="comment">// 设置字体大小</span></span><br><span class="line">            <span class="keyword">int</span> fontsize = <span class="number">14</span>;</span><br><span class="line">            <span class="comment">// 图片位置</span></span><br><span class="line">            PdfContentByte content;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; total; i++) &#123;</span><br><span class="line">                content = stamper.getOverContent(i);</span><br><span class="line">                content.saveState();</span><br><span class="line">                <span class="comment">// set Transparency</span></span><br><span class="line">                PdfGState gs = <span class="keyword">new</span> PdfGState();</span><br><span class="line">                gs.setFillOpacity(<span class="number">0.1f</span>);<span class="comment">// 设置透明度为0.1</span></span><br><span class="line">                content.setGState(gs);</span><br><span class="line"></span><br><span class="line">                content.beginText();</span><br><span class="line">                <span class="keyword">if</span> (StringUtils.isEmpty(color) || color.equals(<span class="string">"white"</span>)) &#123;</span><br><span class="line">                    content.setColorFill(BaseColor.WHITE);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (color.equals(<span class="string">"red"</span>)) &#123;</span><br><span class="line">                    content.setColorFill(BaseColor.RED);</span><br><span class="line">                &#125;</span><br><span class="line">                content.setFontAndSize(base, fontsize);</span><br><span class="line">                <span class="keyword">int</span> lean = <span class="number">45</span>;</span><br><span class="line">                JLabel label = <span class="keyword">new</span> JLabel();</span><br><span class="line">                FontMetrics metrics;</span><br><span class="line">                <span class="keyword">int</span> textH = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">int</span> textW = <span class="number">0</span>;</span><br><span class="line">                label.setText(waterMarkName);</span><br><span class="line">                metrics = label.getFontMetrics(label.getFont());</span><br><span class="line">                textH = metrics.getHeight() * <span class="number">16</span>;<span class="comment">// 字符串的高, 只和字体有关</span></span><br><span class="line">                textW = metrics.stringWidth(label.getText());<span class="comment">// 字符串的宽</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; height; j = j + <span class="number">90</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt; width; k = k + textW) &#123;</span><br><span class="line">                        content.showTextAligned(Element.ALIGN_LEFT, waterMarkName, k, j, lean);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                content.endText();</span><br><span class="line">                content.restoreState();<span class="comment">// 注意这里必须调用一次restoreState 否则设置无效</span></span><br><span class="line">            &#125;</span><br><span class="line">            stamper.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            addPdfTextMark(<span class="string">"E:\\workspace-train\\springboot-teach8\\target\\HelloWorld.pdf"</span>,</span><br><span class="line">                <span class="string">"E:\\workspace-train\\springboot-teach8\\target\\test@.pdf"</span>, <span class="string">"robin推荐,保密文件仅供测试使用"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码地址-1"><a href="#源码地址-1" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach8" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach8</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SpringBoot入门之七 文件处理之Excel PDF </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-07, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-03, 16:57:30</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/" title="SpringBoot入门之七 文件处理之Excel PDF ">https://xiaolaifeng.gitee.io/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

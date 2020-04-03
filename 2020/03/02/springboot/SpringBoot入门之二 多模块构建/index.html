@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot入门之二 多模块构建  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="SpringBoot入门之二 多模块构建  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="contact me">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/contact-me/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:02:30.000Z">
+<meta property="article:modified_time" content="2020-04-03T08:02:31.009Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(10)</small></div></li>
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="10">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/SpringBoot入门之二 多模块构建" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SpringBoot入门之二 多模块构建 </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-04-03 16:57:03'>2020-03-02 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-学习目标"><span class="toc-text">0.学习目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-常见企业项目模块结构"><span class="toc-text">1. 常见企业项目模块结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-构建SpringMVC模块结构-，常见-web-service-model项目结构"><span class="toc-text">1.1.构建SpringMVC模块结构 ，常见 web+service+model项目结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-创建-项目-spring-boot-teach2-parent"><span class="toc-text">1.1.1 创建    项目  spring-boot-teach2-parent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-新建maven-module类型项目-springboot-teach2-web"><span class="toc-text">1.1.2 新建maven module类型项目 springboot-teach2-web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-类似步骤创建springboot-teach2-model-springboot-teach2-service"><span class="toc-text">1.1.2 类似步骤创建springboot-teach2-model,springboot-teach2-service</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-配置文件详解"><span class="toc-text">2.  配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-application-properties-配置文件"><span class="toc-text">2.1  application.properties 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-yml配置文件语法"><span class="toc-text">2.2. yml配置文件语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-配置文件与配置类的属性映射"><span class="toc-text">2.3 配置文件与配置类的属性映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、使用注解-Value-映射"><span class="toc-text">1、使用注解 @Value 映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、使用注解-ConfigurationProperties-映射"><span class="toc-text">2、使用注解 @ConfigurationProperties 映射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-静态资源访问控制"><span class="toc-text">2.4.  静态资源访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-代码方式"><span class="toc-text">2.4.1. 代码方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-配置文件方式"><span class="toc-text">2.4.2 .配置文件方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-了解SpringBoot的启动方式"><span class="toc-text">3. 了解SpringBoot的启动方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-jar包形式打包"><span class="toc-text">3.1 jar包形式打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-war包形式打包发布"><span class="toc-text">3.2 war包形式打包发布</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-热部署"><span class="toc-text">4. 热部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-学习目标"><span class="toc-text">0.学习目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-常见企业项目模块结构"><span class="toc-text">1. 常见企业项目模块结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-构建SpringMVC模块结构-，常见-web-service-model项目结构"><span class="toc-text">1.1.构建SpringMVC模块结构 ，常见 web+service+model项目结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-创建-项目-spring-boot-teach2-parent"><span class="toc-text">1.1.1 创建    项目  spring-boot-teach2-parent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-新建maven-module类型项目-springboot-teach2-web"><span class="toc-text">1.1.2 新建maven module类型项目 springboot-teach2-web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-类似步骤创建springboot-teach2-model-springboot-teach2-service"><span class="toc-text">1.1.2 类似步骤创建springboot-teach2-model,springboot-teach2-service</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-配置文件详解"><span class="toc-text">2.  配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-application-properties-配置文件"><span class="toc-text">2.1  application.properties 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-yml配置文件语法"><span class="toc-text">2.2. yml配置文件语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-配置文件与配置类的属性映射"><span class="toc-text">2.3 配置文件与配置类的属性映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、使用注解-Value-映射"><span class="toc-text">1、使用注解 @Value 映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、使用注解-ConfigurationProperties-映射"><span class="toc-text">2、使用注解 @ConfigurationProperties 映射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-静态资源访问控制"><span class="toc-text">2.4.  静态资源访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-代码方式"><span class="toc-text">2.4.1. 代码方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-配置文件方式"><span class="toc-text">2.4.2 .配置文件方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-了解SpringBoot的启动方式"><span class="toc-text">3. 了解SpringBoot的启动方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-jar包形式打包"><span class="toc-text">3.1 jar包形式打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-war包形式打包发布"><span class="toc-text">3.2 war包形式打包发布</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-热部署"><span class="toc-text">4. 热部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></div>(SpringBoot入门之二 多模块构建)</p>
+<h1 id="0-学习目标"><a href="#0-学习目标" class="headerlink" title="0.学习目标"></a>0.学习目标</h1><ul>
+<li>常见企业项目模块结构</li>
+<li>了解SpringBoot的配置</li>
+<li>了解SpringBoot打包启动方式</li>
+<li>了解SpringBoot热部署<h1 id="1-常见企业项目模块结构"><a href="#1-常见企业项目模块结构" class="headerlink" title="1. 常见企业项目模块结构"></a>1. 常见企业项目模块结构</h1><h2 id="1-1-构建SpringMVC模块结构-，常见-web-service-model项目结构"><a href="#1-1-构建SpringMVC模块结构-，常见-web-service-model项目结构" class="headerlink" title="1.1.构建SpringMVC模块结构 ，常见 web+service+model项目结构"></a>1.1.构建SpringMVC模块结构 ，常见 web+service+model项目结构</h2><h3 id="1-1-1-创建-项目-spring-boot-teach2-parent"><a href="#1-1-1-创建-项目-spring-boot-teach2-parent" class="headerlink" title="1.1.1 创建    项目  spring-boot-teach2-parent"></a>1.1.1 创建    项目  spring-boot-teach2-parent</h3><img src="https://img-blog.csdnimg.cn/20200304165031197.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在项目根目录创建pom.xml，内容如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot; xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot; xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">	&lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">	&lt;parent&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">		&lt;version&gt;2.0.0.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">		&lt;relativePath&#x2F;&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">	&lt;&#x2F;parent&gt;</span><br><span class="line">	&lt;artifactId&gt;sample.springboot.teach2.parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">	&lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">	&lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">	&lt;description&gt;Spring Boot Data Elasticsearch Sample&lt;&#x2F;description&gt;</span><br><span class="line">	&lt;packaging&gt;pom&lt;&#x2F;packaging&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;properties&gt;</span><br><span class="line">		&lt;main.basedir&gt;$&#123;basedir&#125;&#x2F;..&#x2F;..&lt;&#x2F;main.basedir&gt;</span><br><span class="line">	&lt;&#x2F;properties&gt;</span><br><span class="line"> </span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="1-1-2-新建maven-module类型项目-springboot-teach2-web"><a href="#1-1-2-新建maven-module类型项目-springboot-teach2-web" class="headerlink" title="1.1.2 新建maven module类型项目 springboot-teach2-web"></a>1.1.2 新建maven module类型项目 springboot-teach2-web</h3><p><img src="https://img-blog.csdnimg.cn/20200304170016968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200304170138180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其pom.xml代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;project xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">    xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">  &lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sample.springboot.teach2.parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.0.0.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;&#x2F;parent&gt;</span><br><span class="line">  &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;springboot-teach2-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">   &lt;packaging&gt;jar&lt;&#x2F;packaging&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;name&gt;springboot-teach2-web&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;url&gt;http:&#x2F;&#x2F;maven.apache.org&lt;&#x2F;url&gt;</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-2-类似步骤创建springboot-teach2-model-springboot-teach2-service"><a href="#1-1-2-类似步骤创建springboot-teach2-model-springboot-teach2-service" class="headerlink" title="1.1.2 类似步骤创建springboot-teach2-model,springboot-teach2-service"></a>1.1.2 类似步骤创建springboot-teach2-model,springboot-teach2-service</h3><p>创建完成后目录如下图<br><img src="https://img-blog.csdnimg.cn/20200304171255847.png" alt="在这里插入图片描述">1.1.3 构建3个模块之间的依赖关系<br><img src="https://img-blog.csdnimg.cn/20200304171838619.png" alt="在这里插入图片描述"><br>于是分别在springboot-teach2-web和springboot-teach2-service项目的pom.xml中增加上一级的依赖，具体如下</p>
+<p>springboot-teach2-web  的pom.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;project xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">    xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">  &lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sample.springboot.teach2.parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.0.0.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;&#x2F;parent&gt;</span><br><span class="line">  &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;springboot-teach2-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">   &lt;packaging&gt;jar&lt;&#x2F;packaging&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;name&gt;springboot-teach2-web&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;url&gt;http:&#x2F;&#x2F;maven.apache.org&lt;&#x2F;url&gt;</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">  	&lt;dependency&gt;</span><br><span class="line">  		&lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">  		&lt;artifactId&gt;sample.springboot.teach2.service&lt;&#x2F;artifactId&gt;</span><br><span class="line">  		&lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  	&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">  &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+<p>springboot-teach2-service的pom.xml如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;project xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">    xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">  &lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sample.springboot.teach2.parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.0.0.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;&#x2F;parent&gt;</span><br><span class="line">  &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;sample.springboot.teach2.service&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;packaging&gt;jar&lt;&#x2F;packaging&gt;</span><br><span class="line">  &lt;name&gt;springboot-teach2-service&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;url&gt;http:&#x2F;&#x2F;maven.apache.org&lt;&#x2F;url&gt;</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;sample.springboot.teach2.model&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">  &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+<p>springboot-teach2-model的pom.xml如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;project xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">    xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">  &lt;parent&gt;</span><br><span class="line">   	&lt;artifactId&gt;sample.springboot.teach2.parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">	&lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">	&lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;&#x2F;parent&gt;</span><br><span class="line">  &lt;groupId&gt;sample.springboot.teach2&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;sample.springboot.teach2.model&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;name&gt;springboot-teach2-model&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;packaging&gt;jar&lt;&#x2F;packaging&gt;</span><br><span class="line">  &lt;url&gt;http:&#x2F;&#x2F;maven.apache.org&lt;&#x2F;url&gt;</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    	&lt;dependency&gt;</span><br><span class="line">  		&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">  	&lt;&#x2F;dependency&gt;</span><br><span class="line">  &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ok,项目依赖已构建完毕，那么我们模拟查询用户流程走一遍。<br>在model项目中新建User类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package sample.springboot.teach2.model;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author robin.jiao</span><br><span class="line"> * @date 2020&#x2F;03&#x2F;04</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class User &#123;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;set get 方法省略</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在service项目中新建UserService和UserServiceImple类，如下</p>
+<p>UserService</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package sample.springboot.teach2.service;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import sample.springboot.teach2.model.User;</span><br><span class="line"></span><br><span class="line">public interface UserService &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;User&gt; queryAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserServiceImple</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package sample.springboot.teach2.service;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">import sample.springboot.teach2.model.User;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;User&gt; queryAll() &#123;</span><br><span class="line">        List&lt;User&gt; result &#x3D; new ArrayList&lt;User&gt;();</span><br><span class="line">        User user1 &#x3D; new User();</span><br><span class="line">        user1.setName(&quot;张三&quot;);</span><br><span class="line">        user1.setPassword(&quot;111&quot;);</span><br><span class="line">        result.add(user1);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在web项目中新建UserController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package sample.springboot.teach2.web.controller;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import sample.springboot.teach2.model.User;</span><br><span class="line">import sample.springboot.teach2.service.UserService;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author robin.jiao</span><br><span class="line"> * @date 2020&#x2F;03&#x2F;04</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestController</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserService userService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;user&#x2F;all&quot;)</span><br><span class="line">    public List&lt;User&gt; queryAll() &#123;</span><br><span class="line">        return userService.queryAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并新建启动类</p>
+<p>Teach2Appliction</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package sample.springboot.teach2;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class Teach2Appliction &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Teach2Appliction.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在web项目中的resources文件夹下增加配置文件  application.proerties，并且设置用资源文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">server.port: 8081</span><br></pre></td></tr></table></figure>
+
+<p>执行启动类，效果如下</p>
+<p><img src="https://img-blog.csdnimg.cn/20200304182313877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="2-配置文件详解"><a href="#2-配置文件详解" class="headerlink" title="2.  配置文件详解"></a>2.  配置文件详解</h1><p>SpringBoot配置文件可以归为以下两种：</p>
+<pre><code>application.properties
+application.yml(application.yaml)</code></pre><h2 id="2-1-application-properties-配置文件"><a href="#2-1-application-properties-配置文件" class="headerlink" title="2.1  application.properties 配置文件"></a>2.1  application.properties 配置文件</h2><p>上一步创建 application.properties 配置文件去覆盖 SpringBoot 的默认配置， 我们知道 Tomcat 默认打开端口是8080，可以通过 application.properties 配置文件去修改这个默认配置<br>properties 文件是以键值对的形式编写，可以看到，通过修改application.properties 配置文件，已经将 Tomcat 端口改为 8081，覆盖了之前的配置，由于 properties 文件在以往用的也比较多，较为常见，这里就不做过多讲述，主要还是对 yml 配置文件进行学习。<br> application.yml(application.yaml) 配置文件</p>
+<p>YML文件格式是YAML (YAML Aint Markup Language)编写的文件格式，YAML是一种直观的能够被电脑识别的的数据数据序列化格式，并且容易被人类阅读，容易和脚本语言交互的，可以被支持YAML库的不同的编程语言程序导入，比如： C/C++, Ruby, Python, Java, Perl, C#, PHP等。YML文件是以数据为核心的，比传统的xml方式更加简洁。YML文件的扩展名可以使用.yml或者.yaml。</p>
+<h2 id="2-2-yml配置文件语法"><a href="#2-2-yml配置文件语法" class="headerlink" title="2.2. yml配置文件语法"></a>2.2. yml配置文件语法</h2><p>yml 的配置可以分为下面几种，我们先在 resources 文件夹下面创建 application.yml 配置文件</p>
+<pre><code>配置普通数据
+配置对象数据
+配置Map数据
+配置数组数据</code></pre><p>配置普通数据：</p>
+<pre><code>语法： key: value
+eg：</code></pre><p>name: onestar</p>
+<p>注意：value前面有一个空格</p>
+<p>配置对象数据：</p>
+<pre><code>语法1：
+    key:
+        key1: value1
+        key2: value2
+语法2：
+    key: {key1: value1,key2: value2}
+eg：
+
+user:
+    name: oneStar
+    age: 18
+    addr: yichun
+
+
+#或者
+user: {name: oneStar,age: 18,addr: yihcun}</code></pre><p>注意：key1前面的空格个数不限定，在yml语法中，相同缩进代表同一个级别</p>
+<p>配置Map数据：</p>
+<pre><code>配置Map数据和配置对象数据相同
+eg：
+
+map:
+    key1: value1
+    key2: value2</code></pre><p>配置数组数据：</p>
+<pre><code>语法1
+    key:
+        - value1
+        - value2
+语法2
+    key: [value1,value2]
+eg：
+
+city:
+  - beijing
+  - tianjin
+  - shanghai
+  - chongqing
+
+#或者
+city: [beijing,tianjin,shanghai,chongqing]
+
+#集合中的元素是对象形式
+student:
+  - name: oneStar
+    age: 18
+    score: 100
+  - name: twoStar
+    age: 28
+    score: 88
+  - name: threeStar
+    age: 38
+    score: 90</code></pre><p>注意：value1与之间的 - 之间存在一个空格 </p>
+<h2 id="2-3-配置文件与配置类的属性映射"><a href="#2-3-配置文件与配置类的属性映射" class="headerlink" title="2.3 配置文件与配置类的属性映射"></a>2.3 配置文件与配置类的属性映射</h2><p>配置文件中的配置，不管是 properties 文件还是 yml 文件，有一些配置 SpringBoot 会自动去识别，比如 server.port=8888 配置，但有一些我们自定义的配置，SpringBoot 并不能自动识别，怎样才能让 SpringBoot 认识自己配置的信息呢，这里就有两种方法：</p>
+<pre><code>使用注解 @Value 映射
+
+使用注解 @ConfigurationProperties 映射</code></pre><h3 id="1、使用注解-Value-映射"><a href="#1、使用注解-Value-映射" class="headerlink" title="1、使用注解 @Value 映射"></a>1、使用注解 @Value 映射</h3><p>我们可以通过@Value注解将配置文件中的值映射到一个Spring管理的Bean的字段上，这里以 yml 文件进行说明</p>
+<pre><code>application.yml 配置如下：
+
+user:
+  name: oneStar
+  age: 18
+
+实体Bean代码如下：</code></pre><p>@RestController<br>public class UserController {</p>
+<pre><code>@Autowired
+private UserService userService;
+
+@GetMapping(&quot;/user/all&quot;)
+public List&lt;User&gt; queryAll() {
+    return userService.queryAll();
+}
+
+@Value(&quot;${user.name}&quot;)
+private String name;
+@Value(&quot;${user.age}&quot;)
+private int age;
+
+@GetMapping(&quot;/get-user&quot;)
+public String getUser() {
+    return &quot;name=&quot; + name + &quot;,age=&quot; + age;
+}</code></pre><p>}</p>
+<p>运行后，浏览器访问地址：<a href="http://localhost:8081/get-user结果如下：" target="_blank" rel="noopener">http://localhost:8081/get-user结果如下：</a>  </p>
+<h3 id="2、使用注解-ConfigurationProperties-映射"><a href="#2、使用注解-ConfigurationProperties-映射" class="headerlink" title="2、使用注解 @ConfigurationProperties 映射"></a>2、使用注解 @ConfigurationProperties 映射</h3><p>使用 Value 映射能够精确的匹配到某一属性，但如果有很多属性，就带来了不便，因此，还可以使用 @ConfigurationProperties 映射，通过注解@ConfigurationProperties(prefix=”配置文件中的key的前缀”)可以将配置文件中的配置自动与实体进行映射</p>
+<pre><code>application.yml 配置如下：
+
+user:
+  name: oneStar
+  age: 19
+
+实体Bean代码如下：
+
+@Controller
+@ConfigurationProperties(prefix = &quot;user&quot;)
+public class UserController {
+    private String name;
+    private int age;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @RequestMapping(&quot;/get-user&quot;)
+    @ResponseBody
+    public String quick(){
+        return &quot;name=&quot;+name+&quot;,age=&quot;+age;
+    }
+}</code></pre><p>运行后，浏览器访问地址：<a href="http://localhost:8081/get-user" target="_blank" rel="noopener">http://localhost:8081/get-user</a> 结果如下：<br><img src="https://img-blog.csdnimg.cn/20200304190155299.png" alt="在这里插入图片描述"><br>注</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">属性notExists对应的配置信息，在配置文件中没有定义，则返回默认的data</span><br><span class="line">属性name对应的配置信息 user.name 在application.properties文件中是oneStar，但是返回了user（测试环境为mac，mac系统的用户名为user，为啥叫user？因为某某人…）</span><br><span class="line">造成这个的根源是application.properties的配置被更高优先级的系统配置覆盖了</span><br></pre></td></tr></table></figure>
+
+<p>注意：使用@ConfigurationProperties方式可以进行配置文件与实体字段的自动映射，但需要字段必须提供set方法才可以，而使用@Value注解修饰的字段不需要提供set方法 </p>
+<h2 id="2-4-静态资源访问控制"><a href="#2-4-静态资源访问控制" class="headerlink" title="2.4.  静态资源访问控制"></a>2.4.  静态资源访问控制</h2><p> 在我们开发Web应用的时候，需要应用大量的js、css、图片等静态资源。<br> springboot静态资源访问可通过两种方式配置</p>
+<h3 id="2-4-1-代码方式"><a href="#2-4-1-代码方式" class="headerlink" title="2.4.1. 代码方式"></a>2.4.1. 代码方式</h3><p>代码方式需要启用@EnableWebMvc注解，同时实现WebMvcConfigurer接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">    registry.addResourceHandler(&quot;&#x2F;static&#x2F;*&quot;).addResourceLocations(&quot;classpath:&#x2F;static&#x2F;&quot;);</span><br><span class="line">    registry.addResourceHandler(&quot;&#x2F;**&quot;).addResourceLocations(&quot;file:&#x2F;Users&#x2F;guoxiang&#x2F;Documents&#x2F;product-template&#x2F;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-2-配置文件方式"><a href="#2-4-2-配置文件方式" class="headerlink" title="2.4.2 .配置文件方式"></a>2.4.2 .配置文件方式</h3><p>SpringBoot默认提供静态资源目录需要置于classpath下，目录名称符合如下规则：<br>/static<br>/public<br>/resources<br>/META-INF/resources<br>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  resources:</span><br><span class="line">    static-locations:</span><br><span class="line">    - classpath:&#x2F;static&#x2F;</span><br><span class="line">    - file:&#x2F;XXX&#x2F;template&#x2F;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是：<br>    如果启动了EnableWebMvc，则配置文件会失效，两种方式只能选其一<br>    在配置的路径后面，必须以“/”结尾，否则配置无效</p>
+<h1 id="3-了解SpringBoot的启动方式"><a href="#3-了解SpringBoot的启动方式" class="headerlink" title="3. 了解SpringBoot的启动方式"></a>3. 了解SpringBoot的启动方式</h1><h2 id="3-1-jar包形式打包"><a href="#3-1-jar包形式打包" class="headerlink" title="3.1 jar包形式打包"></a>3.1 jar包形式打包</h2><p> 以上案例是以jar形式打包的，关于如何打包，可以使用eclipse的默认方法，点击项目右键，<br> Run as》Maven Install，打包结果目录如下<br> <img src="https://img-blog.csdnimg.cn/20200304184457969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">上传到linux服务器后，可以使用java 命令启动，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar springboot-teach2-web-1.0.0.jar</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-war包形式打包发布"><a href="#3-2-war包形式打包发布" class="headerlink" title="3.2 war包形式打包发布"></a>3.2 war包形式打包发布</h2><p>springboot-teach2-web项目的pom文件，将jar改为war，然后按照上一步方式打包。<br><img src="https://img-blog.csdnimg.cn/20200304185028159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">打包结果如下：<br><img src="https://img-blog.csdnimg.cn/20200304185223505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">将war上传到服务器tomcat的webapps目录，  启动tomcat即可</p>
+<h1 id="4-热部署"><a href="#4-热部署" class="headerlink" title="4. 热部署"></a>4. 热部署</h1><p>在应用正在运行的时候升级软件，却不需要重新启动应用。SpringBoot热部署就是在项目正在运行的时候修改代码, 却不需要重新启动项目.</p>
+<p>SpringBoot提供了热部署方案,大大提高了开发效率, 因为频繁的重启项目,势必会浪费很多时间, 有了热部署后,妈妈再也不用担心我修改代码重启项目了~<br>   springboot-teach2-web项目中的  pom文件中导入spring-boot-devtools依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--SpringBoot热部署--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;spring-boot-devtools&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>使用热部署的项目，在集成dubbo时，常常与遇到一些问题，此处不详细展开。</p>
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p> <a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach2-parent" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach2-parent</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SpringBoot入门之二 多模块构建 </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-02, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-03, 16:57:03</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/" title="SpringBoot入门之二 多模块构建 ">https://xiaolaifeng.gitee.io/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
