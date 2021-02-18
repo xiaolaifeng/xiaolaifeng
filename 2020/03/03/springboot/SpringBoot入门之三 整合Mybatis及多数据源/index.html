@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot入门之三 整合Mybatis及多数据源  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="SpringBoot入门之三 整合Mybatis及多数据源  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/categories/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:18:46.000Z">
+<meta property="article:modified_time" content="2021-02-06T10:05:17.956Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mybatis">mybatis<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">pagehelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">paginationhelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">generator</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">pycharm</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="python "
+           href="/2021/02/02/python/PyCharm%20%E7%9C%9F%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
+           data-tag="python,pycharm"
+           data-author="" >
+            <span class="post-title" title="PyCharm 真永久激活方法与插件使用教程 ">PyCharm 真永久激活方法与插件使用教程 </span>
+            <span class="post-date" title="2021-02-02 16:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/02/python/Python%E5%AE%89%E8%A3%85/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python下载安装教程 ">Python下载安装教程 </span>
+            <span class="post-date" title="2021-02-02 12:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/01/python/python%20%E8%AF%BE%E7%A8%8B%E4%BD%93%E7%B3%BB/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python 课程体系 ">Python 课程体系 </span>
+            <span class="post-date" title="2021-02-01 16:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="blog "
+           href="/2021/02/01/blog/%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag="博客,hexo"
+           data-author="" >
+            <span class="post-title" title="构建个人博客">构建个人博客</span>
+            <span class="post-date" title="2021-02-01 12:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/09/mybatis/MyBatis%E4%B9%8B%E4%B9%9D%20PaginationHelper%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之九 PaginationHelper的使用方法 ">MyBatis之九 PaginationHelper的使用方法 </span>
+            <span class="post-date" title="2020-04-09 16:00:35">2020/04/09</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之八 Mapper 接口大全 ">MyBatis之八 Mapper 接口大全 </span>
+            <span class="post-date" title="2020-04-08 16:00:35">2020/04/08</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/07/mybatis/MyBatis%E4%B9%8B%E4%B8%83%203.3.0%20%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E5%86%85%E5%AE%B9%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之七 3.3.0 版本新增内容使用文档 ">MyBatis之七 3.3.0 版本新增内容使用文档 </span>
+            <span class="post-date" title="2020-04-07 16:00:35">2020/04/07</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/06/mybatis/MyBatis%E4%B9%8B%E5%85%AD%20%E5%BC%80%E5%8F%91%E8%87%AA%E5%B7%B1%E7%9A%84%E9%80%9A%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之六 开发自己的通用接口方法 ">MyBatis之六 开发自己的通用接口方法 </span>
+            <span class="post-date" title="2020-04-06 16:00:35">2020/04/06</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/05/mybatis/MyBatis%E4%B9%8B%E4%BA%94%20%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之五 高级用法 ">MyBatis之五 高级用法 </span>
+            <span class="post-date" title="2020-04-05 16:00:35">2020/04/05</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/04/mybatis/MyBatis%E4%B9%8B%E5%9B%9B%20UUID%20%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之四 UUID 简单示例 ">MyBatis之四 UUID 简单示例 </span>
+            <span class="post-date" title="2020-04-04 16:00:35">2020/04/04</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/03/mybatis/MyBatis%E4%B9%8B%E4%B8%89%20%E8%87%AA%E5%AE%9A%E4%B9%89MyBatis%20Generator%20%E6%8F%92%E4%BB%B6/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之三 自定义MyBatis Generator 插件 ">MyBatis之三 自定义MyBatis Generator 插件 </span>
+            <span class="post-date" title="2020-04-03 16:00:35">2020/04/03</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/02/mybatis/MyBatis%E4%B9%8B%E4%BA%8C%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之二使用通用Mapper ">MyBatis之二使用通用Mapper </span>
+            <span class="post-date" title="2020-04-02 16:00:35">2020/04/02</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/01/mybatis/MyBatis%E4%B9%8B%E4%B8%80%E9%9B%86%E6%88%90%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之一集成通用Mapper ">MyBatis之一集成通用Mapper </span>
+            <span class="post-date" title="2020-04-01 16:00:35">2020/04/01</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/SpringBoot入门之三 整合Mybatis及多数据源" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SpringBoot入门之三 整合Mybatis及多数据源 </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-02-06 18:05:17'>2020-03-03 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-springboot整合使用jdbcTemplate"><span class="toc-text">1. springboot整合使用jdbcTemplate</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-springboot整合使用mybatis"><span class="toc-text">2. springboot整合使用mybatis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-SpringBoot-Mybatis注解版"><span class="toc-text">2.1 SpringBoot+Mybatis注解版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-SpringBoot-Mybatis-XML版本"><span class="toc-text">2.2 SpringBoot+Mybatis XML版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-集成mybatis-generator插件"><span class="toc-text">3. 集成mybatis generator插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-配置Maven-pom-xml-文件"><span class="toc-text">3.1. 配置Maven pom.xml 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-配置mybatis-generator的配置文件"><span class="toc-text">3.2. 配置mybatis-generator的配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-生成代码"><span class="toc-text">3.3 生成代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-配置多数据源"><span class="toc-text">4. 配置多数据源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-首先定义数据源配置"><span class="toc-text">4.1.首先定义数据源配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-配置数据源的相关注入数据源对象"><span class="toc-text">4.2. 配置数据源的相关注入数据源对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Dao数据持久层"><span class="toc-text">4.3. Dao数据持久层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Service服务层，注意事务"><span class="toc-text">4.4 Service服务层，注意事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-知识扩展"><span class="toc-text">4.5 知识扩展</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-springboot整合使用jdbcTemplate"><span class="toc-text">1. springboot整合使用jdbcTemplate</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-springboot整合使用mybatis"><span class="toc-text">2. springboot整合使用mybatis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-SpringBoot-Mybatis注解版"><span class="toc-text">2.1 SpringBoot+Mybatis注解版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-SpringBoot-Mybatis-XML版本"><span class="toc-text">2.2 SpringBoot+Mybatis XML版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-集成mybatis-generator插件"><span class="toc-text">3. 集成mybatis generator插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-配置Maven-pom-xml-文件"><span class="toc-text">3.1. 配置Maven pom.xml 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-配置mybatis-generator的配置文件"><span class="toc-text">3.2. 配置mybatis-generator的配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-生成代码"><span class="toc-text">3.3 生成代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-配置多数据源"><span class="toc-text">4. 配置多数据源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-首先定义数据源配置"><span class="toc-text">4.1.首先定义数据源配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-配置数据源的相关注入数据源对象"><span class="toc-text">4.2. 配置数据源的相关注入数据源对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Dao数据持久层"><span class="toc-text">4.3. Dao数据持久层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Service服务层，注意事务"><span class="toc-text">4.4 Service服务层，注意事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-知识扩展"><span class="toc-text">4.5 知识扩展</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></div>(SpringBoot入门之三 数据访问及多数据源)</p>
+<h1 id="1-springboot整合使用jdbcTemplate"><a href="#1-springboot整合使用jdbcTemplate" class="headerlink" title="1. springboot整合使用jdbcTemplate"></a>1. springboot整合使用jdbcTemplate</h1><p>1.1 pom文件引入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">		&lt;&#x2F;dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-jdbc&lt;&#x2F;artifactId&gt;</span><br><span class="line">		&lt;&#x2F;dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">		&lt;&#x2F;dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">		    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">		    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">		&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">	&lt;&#x2F;dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>1.2 yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server :</span><br><span class="line">  port : 8081</span><br><span class="line">spring: </span><br><span class="line">  datasource: </span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;localhost:3307&#x2F;springboot?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8</span><br><span class="line">###springboot2 多数据源有个bug  url-》jdbc-url</span><br><span class="line">    username: root</span><br><span class="line">    password: </span><br><span class="line">    driver-class-name: com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
+<p>1.3 Mapper代码</p>
+<h1 id="2-springboot整合使用mybatis"><a href="#2-springboot整合使用mybatis" class="headerlink" title="2. springboot整合使用mybatis"></a>2. springboot整合使用mybatis</h1><p>Mybatis是一款支持复杂的SQL语句，存储过程及高级映射的持久层的框架。使用Mybatis有两种方式，XML和注解。</p>
+<h2 id="2-1-SpringBoot-Mybatis注解版"><a href="#2-1-SpringBoot-Mybatis注解版" class="headerlink" title="2.1 SpringBoot+Mybatis注解版"></a>2.1 SpringBoot+Mybatis注解版</h2><p>Mybatis初期使用比较麻烦，需要很多配置文件、实体类、dao层映射、还有很多其他的配置。初期开发使用generator可以根据表结构自动生产实体类、dao层代码，这样是可以减轻一部分开发量；后期mybatis进行大量的优化，现在可以使用注解版本，自动管理dao层和配置文件。</p>
+<p>mybatis-spring-boot-starte就是SpringBoot集成Mybatis的jar包，可以完全使用注解，无需配置文件，简单配置轻松上手。<br>2.1.1 在Maven pom.xml文件中加入Mybatis和MySQL的jar包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 整合mybatise需要的依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;2.0.0&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;druid-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;1.1.9&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.1.2 配置application.yml文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring: </span><br><span class="line">  datasource: </span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;localhost:3307&#x2F;springboot?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8</span><br><span class="line">###springboot2 多数据源有个bug  url-》jdbc-url</span><br><span class="line">    username: root</span><br><span class="line">    password: </span><br><span class="line">    driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">    type : com.alibaba.druid.pool.DruidDataSource</span><br></pre></td></tr></table></figure>
+<p>springboot会自动加载spring.datasource.*相关配置，数据源就会自动注入到sqlSessionFactory中，sqlSessionFactory会自动注入到Mapper中。<br>mybatis-spring-boot-starter的2.0.0与2.1.1版本还是有区别，如果升级到2.1.1，同样的代码会报以下错误<br> Property ‘sqlSessionFactory’ or ‘sqlSessionTemplate’ are required<br>为解决多数据源问题，mybatis取消啦自动注入sqlSessionFactory等，可以手动注入，此处不详细展开。</p>
+<p>在启动类中添加对mapper包扫描@MapperScan或者在每个Mapper类中增加上面添加注解@Mapper,推荐在启动类加注解，这样不用在每个Mapper类加注解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@MapperScan(&quot;sample.springboot.teach3.mapper&quot;)</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringbootTeach3Application &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootTeach3Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.1.3 开发Mapper<br>所有的sql都在注解上。</p>
+<p>@Select 是查询类的注解，所有的查询均使用这个</p>
+<p>@Result 修饰返回的结果集，关联实体类属性和数据库字段一一对应，如果实体类属性和数据库属性名保持一致，就不需要这个属性来修饰。</p>
+<p>@Insert 插入数据库使用，直接传入实体类会自动解析属性到对应的值</p>
+<p>@Update 负责修改，也可以直接传入对象</p>
+<p>@delete 负责删除</p>
+<p>更多方法请参考mybatis官方地址</p>
+<p><a href="http://www.mybatis.org/mybatis-3/zh/java-api.html" target="_blank" rel="noopener">http://www.mybatis.org/mybatis-3/zh/java-api.html</a></p>
+<p>2.1.4 使用<br>启动项目成功在浏览器输入本机的地址。<br><img src="https://img-blog.csdnimg.cn/20200306111424737.png" alt="在这里插入图片描述"></p>
+<p>源码中controler层有完整的增删改查，这里就不贴了。</p>
+<p>常见问题</p>
+<p>注意#和$的问题？</p>
+<p>#方式能够很大程度防止sql注入，#将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。如：order by #user_id#，如果传入的值是111,那么解析成sql时的值为order by “111”, 如果传入的值是id，则解析成的sql为order by “id”</p>
+<p>$方式无法防止Sql注入，$将传入的数据直接显示生成在sql中。如：order by $user_id$，如果传入的值是111,那么解析成sql时的值为order by user_id,  如果传入的值是id，则解析成的sql为order by id。$方式一般用于传入数据库对象，例如传入表名。</p>
+<p>使用MyBatis排序时使用order by 动态参数时需要注意，用$而不是#。</p>
+<p>#{} 这种取值是编译好SQL语句再取值</p>
+<p>${} 这种是取值以后再去编译SQL语句</p>
+<h2 id="2-2-SpringBoot-Mybatis-XML版本"><a href="#2-2-SpringBoot-Mybatis-XML版本" class="headerlink" title="2.2 SpringBoot+Mybatis XML版本"></a>2.2 SpringBoot+Mybatis XML版本</h2><p>xml版本保持映射文件的老传统，优化主要体现在不需要实现dao的是实现层，而是在映射的xml文件中找到相应的sql语句。<br>2.2.1 配置文件application.yml文件中增加配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#mybatis</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:sample.springboot.teach3.mapper&#x2F;*.xml</span><br><span class="line">  type-aliases-package: sample.springboot.teach3.model</span><br></pre></td></tr></table></figure>
+
+
+<p>2.2.2 Mapper XML本人使用mybatis generator生成器，具体配置生成器的方法不在此展开。代码如下</p>
+<p><img src="https://img-blog.csdnimg.cn/20200306140924268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>2.2.3Dao层<br>Dao层也是自动生成，可增加自定义接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">findMyName</span><span class="params">(@Param(<span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Insert</span>(<span class="string">"INSERT INTO USERS(USER_NAME,AGE) VALUES(#&#123;name&#125;,#&#123;age&#125;)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(@Param(<span class="string">"name"</span>)</span> String naem, @<span class="title">Param</span><span class="params">(<span class="string">"age"</span>)</span> Integer age)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertSelective</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">selectByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKeySelective</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(User record)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.2.4<br>启动，遇到错误如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value <span class="keyword">for</span> xyx.dsw.dao.mapper.admin.quotationwish.TempTestTableMapper.TempTestTableResult</span><br></pre></td></tr></table></figure>
+
+<p>原因分析:</p>
+<p>由于使用ibatis的TempTestTableMapper.xml实现接口TempTestTableMapper.java中的方法的时候的id有重复的值，查看XXXMapper.xml,发现执行多次mybatis generator 所致.</p>
+<p>查询功能，在url页面的测试。<br><img src="https://img-blog.csdnimg.cn/20200306142259915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>源码中controler层有完整的增删改查，这里就不贴了<br>注解和xml如何选择呢？<br>注解版适合简单快速的模式。<br>xml版比较适合大型项目，可以灵活的动态生成SQL，方便调整SQL。</p>
+<h1 id="3-集成mybatis-generator插件"><a href="#3-集成mybatis-generator插件" class="headerlink" title="3. 集成mybatis generator插件"></a>3. 集成mybatis generator插件</h1><p>方法 </p>
+<ol>
+<li>eclipse下用maven插件+Mabatis-generator生成mybatis的文件,</li>
+<li>安装MybatisGenerator插件  此方式不再此展开</li>
+</ol>
+<h2 id="3-1-配置Maven-pom-xml-文件"><a href="#3-1-配置Maven-pom-xml-文件" class="headerlink" title="3.1. 配置Maven pom.xml 文件"></a>3.1. 配置Maven pom.xml 文件</h2><p>在pom.xml增加以下插件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span><span class="comment">&lt;!--jar包去生成对应类 需要连接数据库 数据连接的版本和项目中的一致 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.45<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span><span class="comment">&lt;!--MBG配置文件的路径 --&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">configurationFile</span>&gt;</span>$&#123;basedir&#125;/src/main/resources/generatorConfig.xml<span class="tag">&lt;/<span class="name">configurationFile</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>true<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>配置好Maven插件，下面需要配置插件需要mybatis-generator的配置文件</p>
+<h2 id="3-2-配置mybatis-generator的配置文件"><a href="#3-2-配置mybatis-generator的配置文件" class="headerlink" title="3.2. 配置mybatis-generator的配置文件"></a>3.2. 配置mybatis-generator的配置文件</h2><p>添加配置文件到resource下：</p>
+<p>generatorConfig.xml的内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span> = <span class="string">"test "</span> <span class="attr">targetRuntime</span>=<span class="string">"MyBatis3"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span> =<span class="string">"org.mybatis.generator.plugins.EqualsHashCodePlugin"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span> =<span class="string">"org.mybatis.generator.plugins.SerializablePlugin"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span> =<span class="string">"org.mybatis.generator.plugins.ToStringPlugin"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span><span class="comment">&lt;!-- 这个元素用来去除指定生成的注释中是否包含生成的日期 false:表示包含 --&gt;</span><span class="comment">&lt;!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"suppressDate"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span><span class="comment">&lt;!-- 是否去除自动生成的注释 			true：是 ： false:否 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"suppressAllComments"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span><span class="comment">&lt;!--数据库链接URL，用户名、密码 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span> =<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">connectionURL</span>=<span class="string">"jdbc:mysql://localhost:3307/springboot"</span>		<span class="attr">userId</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"forceBigDecimals"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 生成实体类的包名和位置 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span> =<span class="string">"sample.springboot.teach3.model"</span> <span class="attr">targetProject</span>=<span class="string">"src/main/java"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--生成映射文件的包名和位置 com/lu/mapper --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span> =<span class="string">"sample.springboot.teach3.mapper"</span> <span class="attr">targetProject</span>=<span class="string">"src/main/resources"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span><span class="comment">&lt;!-- 生成DAO的包名和位置 mybatis两种开发模式 xml 注解式 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- &lt;javaClientGenerator type = "XMLMAPPER"	targetPackage="sample.springboot.teach3.mapper" targetProject="src/main/java"&gt;</span></span><br><span class="line"><span class="comment">				&lt;property name = "enableSubPackages" value="true" /&gt;</span></span><br><span class="line"><span class="comment">			&lt;/javaClientGenerator&gt; --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 要生成哪些表 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span> = <span class="string">"users"</span> <span class="attr">domainObjectName</span>=<span class="string">"User"</span>		<span class="attr">enableCountByExample</span>=<span class="string">"false"</span> <span class="attr">enableUpdateByExample</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">				<span class="attr">enableDeleteByExample</span>=<span class="string">"false"</span> <span class="attr">enableSelectByExample</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">				<span class="attr">selectByExampleQueryId</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-生成代码"><a href="#3-3-生成代码" class="headerlink" title="3.3 生成代码"></a>3.3 生成代码</h2><p>在eclipse 中，选择pom.xml文件，击右键先择Run AS——&gt;Maven Build… ——&gt;在Goals框中输入：mybatis-generator:generate，<br><img src="https://img-blog.csdnimg.cn/20200306142645192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>maven会先下载插件，然后生成代码。 </p>
+<p>看效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200306143054299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="4-配置多数据源"><a href="#4-配置多数据源" class="headerlink" title="4. 配置多数据源"></a>4. 配置多数据源</h1><p> SpringBoot多数据源也就是在一个jar存在多个不同的jdbc数据库连接。<br> 在一个项目中存在会员、订单、支付模块，只分包，并不算分布式项目。<br> 分布式项目是将一个大的项目拆分多个不同子项目，子项目之间采用rpc远程调用通信技术。假设我们的数据库分为会员数据库、订单数据库、支付数据库等，存在不同的jdbc；多数据库如何定位自己的数据源：</p>
+<ol>
+<li>分包名<br>sample.teach2.user– 数据用就是会员，或用户<br>sample.teach2.order-订单数据库</li>
+<li>注解形式<br>在service层引入@DataSource(“XXX”)  ，不常用。本文仅使用第一种<h2 id="4-1-首先定义数据源配置"><a href="#4-1-首先定义数据源配置" class="headerlink" title="4.1.首先定义数据源配置"></a>4.1.首先定义数据源配置</h2></li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#=====================multiple database config============================</span><br><span class="line">spring: </span><br><span class="line">  datasource: </span><br><span class="line">    user:</span><br><span class="line">      jdbc-url: jdbc:mysql:<span class="comment">//localhost:3307/springboot?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">  ###springboot2 多数据源有个bug  url-》jdbc-url</span><br><span class="line">      username: root</span><br><span class="line">      password: </span><br><span class="line">      driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">    order :</span><br><span class="line">      jdbc-url: jdbc:mysql:<span class="comment">//localhost:3307/springboot2?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">  ###springboot2 多数据源有个bug  url-》jdbc-url</span><br><span class="line">      username: root</span><br><span class="line">      password: </span><br><span class="line">      driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">###    type : com.alibaba.druid.pool.DruidDataSource</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-配置数据源的相关注入数据源对象"><a href="#4-2-配置数据源的相关注入数据源对象" class="headerlink" title="4.2. 配置数据源的相关注入数据源对象"></a>4.2. 配置数据源的相关注入数据源对象</h2><p> 第一个数据源配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = <span class="string">"sample.springboot.teach3.user"</span>, sqlSessionTemplateRef = <span class="string">"userSqlSessionTemplate"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDataSourceConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"userDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(<span class="string">"spring.datasource.user"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">userDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"userSqlSessionFactory"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">userSqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(userDataSource());</span><br><span class="line">        <span class="keyword">return</span> sqlSessionFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"userTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">userTrancationManager</span><span class="params">(@Qualifier(<span class="string">"userDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"userSqlSessionTemplate"</span>)</span><br><span class="line">    <span class="keyword">public</span> SqlSessionTemplate</span><br><span class="line">        userSqlSessionTemplate(<span class="meta">@Qualifier</span>(<span class="string">"userSqlSessionFactory"</span>) SqlSessionFactory sqlSessionFactory) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>相关知识点：<br>1.使用@Bean可以创建一个bean对象交给spring容器管理<br>2.@Bean创建的bean对象的名称默认为方法名，也可以指定<br>3.@Bean方法参数表示，接收一个bean对象，默认按照type类型接收注入的对象，若要修改为byName方式，可以使用@Qualifier注解注入准确的对象<br>4.@Primary表示该bean为此类型的默认bean，在其他地方引用的时候用@Autowired即可按照类型注入，不受同类型多个对象影响</p>
+<p>其他注解就不清楚了！</p>
+<p>2.配置第二个数据源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = <span class="string">"sample.springboot.teach3.order"</span>, sqlSessionTemplateRef = <span class="string">"orderSqlSessionTemplate"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderDataSourceConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"orderDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(<span class="string">"spring.datasource.order"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">orderDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"orderSqlSessionFactory"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">orderSqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(orderDataSource());</span><br><span class="line">        <span class="keyword">return</span> sqlSessionFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"orderTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">orderTrancationManager</span><span class="params">(@Qualifier(<span class="string">"orderDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"orderSqlSessionTemplate"</span>)</span><br><span class="line">    <span class="keyword">public</span> SqlSessionTemplate</span><br><span class="line">        orderSqlSessionTemplate(<span class="meta">@Qualifier</span>(<span class="string">"orderSqlSessionFactory"</span>) SqlSessionFactory sqlSessionFactory) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-Dao数据持久层"><a href="#4-3-Dao数据持久层" class="headerlink" title="4.3. Dao数据持久层"></a>4.3. Dao数据持久层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">findMyName</span><span class="params">(@Param(<span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Insert</span>(<span class="string">"INSERT INTO USERS(USER_NAME,AGE) VALUES(#&#123;name&#125;,#&#123;age&#125;)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(@Param(<span class="string">"name"</span>)</span> String name, @<span class="title">Param</span><span class="params">(<span class="string">"age"</span>)</span> Integer age)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertSelective</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">selectByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKeySelective</span><span class="params">(User record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(User record)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OrderMapper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(Order record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertSelective</span><span class="params">(Order record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Order <span class="title">selectByPrimaryKey</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKeySelective</span><span class="params">(Order record)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(Order record)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面两个接口分属两个数据源， </p>
+<h2 id="4-4-Service服务层，注意事务"><a href="#4-4-Service服务层，注意事务" class="headerlink" title="4.4 Service服务层，注意事务"></a>4.4 Service服务层，注意事务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addOrder</span><span class="params">(Integer userId, Integer total)</span> </span>&#123;</span><br><span class="line">        Order order = <span class="keyword">new</span> Order();</span><br><span class="line">        order.setTotal(Float.valueOf(total));</span><br><span class="line">        order.setUserId(userId);</span><br><span class="line">        <span class="keyword">int</span> result = orderMapper.insertSelective(order);</span><br><span class="line">        <span class="keyword">return</span> result &gt; <span class="number">0</span> ? <span class="keyword">true</span> : <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addUser2</span><span class="params">(String userName, Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = userMapper.add(userName, age);</span><br><span class="line">        <span class="keyword">return</span> result &gt; <span class="number">0</span> ? <span class="keyword">true</span> : <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userMapper.selectByPrimaryKey(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-5-知识扩展"><a href="#4-5-知识扩展" class="headerlink" title="4.5 知识扩展"></a>4.5 知识扩展</h2><p>1.如果采用传统jpa方式，@EnableJpaRepositories无需配置，配置了也无影响。实现方式如下：</p>
+<p>ds1相关DaoImpl</p>
+<p>@PersistenceContext<br>private EntityManager entityManager;</p>
+<p>ds2相关DaoImpl</p>
+<p>@PersistenceContext(unitName = “secondDs”)<br>private EntityManager entityManager;</p>
+<p>因为ds1的entityManger声明了@Primary，所以无需指明unitName,ds2必须指明。注入了准确的entityManager，就可以直接拿来操作数据库了。service层和上面一样的，@Transactional(“xxxManager”)指明事物管理器即可！</p>
+<p>2.采用jdbcTemplate方式，直接注入到Service层对象即可，so easy!</p>
+<p>@Autowired<br>private JdbcTemplate jdbcTemplate;</p>
+<p>@Autowired<br>private TransactionTemplate transactionTemplate;</p>
+<p>@Resource(name=”jdbcTemplate2”)<br>private JdbcTemplate jdbcTemplate2;</p>
+<p>@Resource(name=”transactionTemplate2”)<br>private TransactionTemplate transactionTemplate2;</p>
+<p>好了，spring boot 多数据源，完美解决！ 而且三种数据库操作方法均支持，包括事物。已经经过实践证明了！ 这是官方给出的最佳实践，只是官方文档没写细而已。</p>
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach3" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach3</a><br>注解版:<br>XML版：</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SpringBoot入门之三 整合Mybatis及多数据源 </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-03, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2021-02-06, 18:05:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" title="SpringBoot入门之三 整合Mybatis及多数据源 ">https://xiaolaifeng.gitee.io/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot','#mybatis','#pagehelper','#paginationhelper','#generator','#博客','#hexo','#python','#pycharm',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

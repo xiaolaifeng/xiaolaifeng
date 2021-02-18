@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot入门之五 整合邮件服务  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="SpringBoot入门之五 整合邮件服务  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/categories/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:18:46.000Z">
+<meta property="article:modified_time" content="2021-02-06T10:05:17.956Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mybatis">mybatis<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">pagehelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">paginationhelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">generator</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">pycharm</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="python "
+           href="/2021/02/02/python/PyCharm%20%E7%9C%9F%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
+           data-tag="python,pycharm"
+           data-author="" >
+            <span class="post-title" title="PyCharm 真永久激活方法与插件使用教程 ">PyCharm 真永久激活方法与插件使用教程 </span>
+            <span class="post-date" title="2021-02-02 16:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/02/python/Python%E5%AE%89%E8%A3%85/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python下载安装教程 ">Python下载安装教程 </span>
+            <span class="post-date" title="2021-02-02 12:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/01/python/python%20%E8%AF%BE%E7%A8%8B%E4%BD%93%E7%B3%BB/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python 课程体系 ">Python 课程体系 </span>
+            <span class="post-date" title="2021-02-01 16:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="blog "
+           href="/2021/02/01/blog/%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag="博客,hexo"
+           data-author="" >
+            <span class="post-title" title="构建个人博客">构建个人博客</span>
+            <span class="post-date" title="2021-02-01 12:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/09/mybatis/MyBatis%E4%B9%8B%E4%B9%9D%20PaginationHelper%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之九 PaginationHelper的使用方法 ">MyBatis之九 PaginationHelper的使用方法 </span>
+            <span class="post-date" title="2020-04-09 16:00:35">2020/04/09</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之八 Mapper 接口大全 ">MyBatis之八 Mapper 接口大全 </span>
+            <span class="post-date" title="2020-04-08 16:00:35">2020/04/08</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/07/mybatis/MyBatis%E4%B9%8B%E4%B8%83%203.3.0%20%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E5%86%85%E5%AE%B9%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之七 3.3.0 版本新增内容使用文档 ">MyBatis之七 3.3.0 版本新增内容使用文档 </span>
+            <span class="post-date" title="2020-04-07 16:00:35">2020/04/07</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/06/mybatis/MyBatis%E4%B9%8B%E5%85%AD%20%E5%BC%80%E5%8F%91%E8%87%AA%E5%B7%B1%E7%9A%84%E9%80%9A%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之六 开发自己的通用接口方法 ">MyBatis之六 开发自己的通用接口方法 </span>
+            <span class="post-date" title="2020-04-06 16:00:35">2020/04/06</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/05/mybatis/MyBatis%E4%B9%8B%E4%BA%94%20%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之五 高级用法 ">MyBatis之五 高级用法 </span>
+            <span class="post-date" title="2020-04-05 16:00:35">2020/04/05</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/04/mybatis/MyBatis%E4%B9%8B%E5%9B%9B%20UUID%20%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之四 UUID 简单示例 ">MyBatis之四 UUID 简单示例 </span>
+            <span class="post-date" title="2020-04-04 16:00:35">2020/04/04</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/03/mybatis/MyBatis%E4%B9%8B%E4%B8%89%20%E8%87%AA%E5%AE%9A%E4%B9%89MyBatis%20Generator%20%E6%8F%92%E4%BB%B6/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之三 自定义MyBatis Generator 插件 ">MyBatis之三 自定义MyBatis Generator 插件 </span>
+            <span class="post-date" title="2020-04-03 16:00:35">2020/04/03</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/02/mybatis/MyBatis%E4%B9%8B%E4%BA%8C%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之二使用通用Mapper ">MyBatis之二使用通用Mapper </span>
+            <span class="post-date" title="2020-04-02 16:00:35">2020/04/02</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/01/mybatis/MyBatis%E4%B9%8B%E4%B8%80%E9%9B%86%E6%88%90%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之一集成通用Mapper ">MyBatis之一集成通用Mapper </span>
+            <span class="post-date" title="2020-04-01 16:00:35">2020/04/01</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/SpringBoot入门之五 整合邮件服务" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SpringBoot入门之五 整合邮件服务 </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-02-06 18:05:17'>2020-03-05 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-应用场景"><span class="toc-text">1. 应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-配置"><span class="toc-text">2.配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1maven依赖"><span class="toc-text">2.1maven依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-application-xml"><span class="toc-text">2.2 application.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-普-发送"><span class="toc-text">3.普 发送</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1发送文本邮件"><span class="toc-text">3.1发送文本邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2发送带附件邮件"><span class="toc-text">3.2发送带附件邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-发送html格式的文本邮件"><span class="toc-text">3.3 发送html格式的文本邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4多个邮件接收人"><span class="toc-text">3.4多个邮件接收人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5抄送"><span class="toc-text">3.5抄送</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-整合thymeleaf模板"><span class="toc-text">5.整合thymeleaf模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-自定义邮件内容实体，编写可重复使用的工具类"><span class="toc-text">5.1 自定义邮件内容实体，编写可重复使用的工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-pom-xml中引入依赖thymeleaf"><span class="toc-text">5.2 pom.xml中引入依赖thymeleaf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-MailService工具类中增加使用邮件模板的方法"><span class="toc-text">5.3 MailService工具类中增加使用邮件模板的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-邮件模板"><span class="toc-text">5.4 邮件模板</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-整合Freemarker模板"><span class="toc-text">6. 整合Freemarker模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-引入pom-xml"><span class="toc-text">6.1 引入pom.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-配置properties文件"><span class="toc-text">6.2 配置properties文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-编写邮件模板html"><span class="toc-text">6.3 编写邮件模板html</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-整合freemark模板引擎的方法"><span class="toc-text">6.4 整合freemark模板引擎的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-应用场景"><span class="toc-text">1. 应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-配置"><span class="toc-text">2.配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1maven依赖"><span class="toc-text">2.1maven依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-application-xml"><span class="toc-text">2.2 application.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-普-发送"><span class="toc-text">3.普 发送</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1发送文本邮件"><span class="toc-text">3.1发送文本邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2发送带附件邮件"><span class="toc-text">3.2发送带附件邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-发送html格式的文本邮件"><span class="toc-text">3.3 发送html格式的文本邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4多个邮件接收人"><span class="toc-text">3.4多个邮件接收人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5抄送"><span class="toc-text">3.5抄送</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-整合thymeleaf模板"><span class="toc-text">5.整合thymeleaf模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-自定义邮件内容实体，编写可重复使用的工具类"><span class="toc-text">5.1 自定义邮件内容实体，编写可重复使用的工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-pom-xml中引入依赖thymeleaf"><span class="toc-text">5.2 pom.xml中引入依赖thymeleaf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-MailService工具类中增加使用邮件模板的方法"><span class="toc-text">5.3 MailService工具类中增加使用邮件模板的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-邮件模板"><span class="toc-text">5.4 邮件模板</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-整合Freemarker模板"><span class="toc-text">6. 整合Freemarker模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-引入pom-xml"><span class="toc-text">6.1 引入pom.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-配置properties文件"><span class="toc-text">6.2 配置properties文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-编写邮件模板html"><span class="toc-text">6.3 编写邮件模板html</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-整合freemark模板引擎的方法"><span class="toc-text">6.4 整合freemark模板引擎的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></div>(SpringBoot入门之五 整合邮件服务)</p>
+<h1 id="1-应用场景"><a href="#1-应用场景" class="headerlink" title="1. 应用场景"></a>1. 应用场景</h1><p>邮件功能的应用场景可谓十分广泛，诸如注册用户、密码找回，业务推广、消息通知、以及一些程序异常通知等都需要使用到该功能。</p>
+<p>正是由于邮件功能的使用广泛，因此springboot也加在它的组件中添加了邮件。</p>
+<h1 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h1><h2 id="2-1maven依赖"><a href="#2-1maven依赖" class="headerlink" title="2.1maven依赖"></a>2.1maven依赖</h2><p>springboot中已经给我们准备好了邮件的相关组件，我们只要在springboot项目中将其添加即可。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加后继续查看这个组件的相关依赖，可见里面实际也是封装了javax.mail的邮件收发相关类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[INFO] +- org.springframework.boot:spring-boot-starter-mail:jar:<span class="number">2.0</span><span class="number">.0</span>.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework.boot:spring-boot-starter:jar:<span class="number">2.0</span><span class="number">.0</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  +- org.springframework.boot:spring-boot:jar:<span class="number">2.0</span><span class="number">.0</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  +- org.springframework.boot:spring-boot-autoconfigure:jar:<span class="number">2.0</span><span class="number">.0</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  +- org.springframework.boot:spring-boot-starter-logging:jar:<span class="number">2.0</span><span class="number">.0</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  |  +- ch.qos.logback:logback-classic:jar:<span class="number">1.2</span><span class="number">.3</span>:compile</span><br><span class="line">[INFO] |  |  |  |  \- ch.qos.logback:logback-core:jar:<span class="number">1.2</span><span class="number">.3</span>:compile</span><br><span class="line">[INFO] |  |  |  +- org.apache.logging.log4j:log4j-to-slf4j:jar:<span class="number">2.10</span><span class="number">.0</span>:compile</span><br><span class="line">[INFO] |  |  |  |  \- org.apache.logging.log4j:log4j-api:jar:<span class="number">2.10</span><span class="number">.0</span>:compile</span><br><span class="line">[INFO] |  |  |  \- org.slf4j:jul-to-slf4j:jar:<span class="number">1.7</span><span class="number">.25</span>:compile</span><br><span class="line">[INFO] |  |  +- javax.annotation:javax.annotation-api:jar:<span class="number">1.3</span><span class="number">.2</span>:compile</span><br><span class="line">[INFO] |  |  \- org.yaml:snakeyaml:jar:<span class="number">1.19</span>:runtime</span><br><span class="line">[INFO] |  +- org.springframework:spring-context:jar:<span class="number">5.0</span><span class="number">.4</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  +- org.springframework:spring-aop:jar:<span class="number">5.0</span><span class="number">.4</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  +- org.springframework:spring-beans:jar:<span class="number">5.0</span><span class="number">.4</span>.RELEASE:compile</span><br><span class="line">[INFO] |  |  \- org.springframework:spring-expression:jar:<span class="number">5.0</span><span class="number">.4</span>.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-context-support:jar:<span class="number">5.0</span><span class="number">.4</span>.RELEASE:compile</span><br><span class="line">[INFO] |  \- com.sun.mail:javax.mail:jar:<span class="number">1.6</span><span class="number">.1</span>:compile</span><br><span class="line">[INFO] |     \- javax.activation:activation:jar:<span class="number">1.1</span>:compile</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-application-xml"><a href="#2-2-application-xml" class="headerlink" title="2.2 application.xml"></a>2.2 application.xml</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#我这里使用QQ邮箱来发送邮件，因此配置的host是smtp.qq.com，使用其他邮箱需要找到对应的host</span><br><span class="line">spring.mail.host=smtp.qq.com</span><br><span class="line">#发送邮件的邮箱账号</span><br><span class="line">spring.mail.username=*********<span class="meta">@qq</span>.com</span><br><span class="line">#需要登录qq邮箱开启smtp服务 发送邮件的邮箱的SMTP服务密码(有的邮箱使用的是邮箱密码，不同邮箱可能不同)  </span><br><span class="line">spring.mail.password=**********</span><br><span class="line">#是否进行身份验证</span><br><span class="line">spring.mail.properties.mail.smtp.auth=<span class="keyword">true</span></span><br><span class="line">spring.mail.properties.mail.smtp.starttls.enable=<span class="keyword">true</span></span><br><span class="line">spring.mail.properties.mail.smtp.starttls.required=<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="3-普-发送"><a href="#3-普-发送" class="headerlink" title="3.普 发送"></a>3.普 发送</h1><p>我们首先编写一个简单text邮件的样例，之后会再在样例的demo上进行其他几种复杂邮件的发送，以及部分源码的解析。</p>
+<h2 id="3-1发送文本邮件"><a href="#3-1发送文本邮件" class="headerlink" title="3.1发送文本邮件"></a>3.1发送文本邮件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendSimpleEmail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 构造Email消息</span></span><br><span class="line">    SimpleMailMessage message = <span class="keyword">new</span> SimpleMailMessage();</span><br><span class="line">    message.setFrom(<span class="string">"XXX@qq.com"</span>);</span><br><span class="line">    message.setTo(<span class="string">"****@qq.com"</span>);</span><br><span class="line">    <span class="comment">//邮件主题</span></span><br><span class="line">    message.setSubject(<span class="string">"hello"</span>);</span><br><span class="line">    <span class="comment">//邮件内容</span></span><br><span class="line">    message.setText(<span class="string">" this is test!"</span>);</span><br><span class="line">    javaMailSender.send(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2发送带附件邮件"><a href="#3-2发送带附件邮件" class="headerlink" title="3.2发送带附件邮件"></a>3.2发送带附件邮件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMimeEmail</span><span class="params">()</span> <span class="keyword">throws</span> MessagingException </span>&#123;</span><br><span class="line">    <span class="comment">// MimeMessage 本身的 API 有些笨重，我们可以使用 MimeMessageHelper</span></span><br><span class="line">    MimeMessage mimeMessage = javaMailSender.createMimeMessage();</span><br><span class="line">    <span class="comment">// 第二个参数是 true ，表明这个消息是 multipart类型的/</span></span><br><span class="line">    MimeMessageHelper mimeMessageHelper = <span class="keyword">new</span> MimeMessageHelper(mimeMessage, <span class="keyword">true</span>);</span><br><span class="line">    mimeMessageHelper.setFrom(<span class="string">"XXX@qq.com"</span>);</span><br><span class="line">    mimeMessageHelper.setTo(<span class="string">"****@qq.com"</span>);</span><br><span class="line">    mimeMessageHelper.setSubject(<span class="string">"附件邮件主题"</span>);</span><br><span class="line">    mimeMessageHelper.setText(<span class="string">"附件邮件内容"</span>);</span><br><span class="line">    <span class="comment">//添加附件,第一个参数表示添加到 Email 中附件的名称，第二个参数是图片资源</span></span><br><span class="line">    mimeMessageHelper.addAttachment(<span class="string">"test.png"</span>, <span class="keyword">new</span> ClassPathResource(<span class="string">"public/images/boot.png"</span>));</span><br><span class="line">    javaMailSender.send(mimeMessage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-发送html格式的文本邮件"><a href="#3-3-发送html格式的文本邮件" class="headerlink" title="3.3 发送html格式的文本邮件"></a>3.3 发送html格式的文本邮件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">htmlEmail</span><span class="params">()</span> <span class="keyword">throws</span> MessagingException </span>&#123;</span><br><span class="line">    MimeMessage mimeMessage = javaMailSender.createMimeMessage();</span><br><span class="line">    MimeMessageHelper mimeMessageHelper = <span class="keyword">new</span> MimeMessageHelper(mimeMessage, <span class="keyword">true</span>);</span><br><span class="line">    mimeMessageHelper.setFrom(<span class="string">"XXX@qq.com"</span>);</span><br><span class="line">    mimeMessageHelper.setTo(<span class="string">"XXX@qq.com"</span>);</span><br><span class="line">    mimeMessageHelper.setSubject(<span class="string">"富文本邮件主题"</span>);</span><br><span class="line">    String html = <span class="string">"&lt;html&gt;&lt;body&gt;&lt;h4&gt;Hello, world&lt;/h4&gt;&lt;img src='cid:boot' /&gt;&lt;/body&gt;&lt;/html&gt;"</span>;</span><br><span class="line">    mimeMessageHelper.setText(html, <span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 设置内嵌元素 cid，第一个参数表示内联图片的标识符，第二个参数标识资源引用</span></span><br><span class="line">    mimeMessageHelper.addInline(<span class="string">"test"</span>, <span class="keyword">new</span> ClassPathResource(<span class="string">"public/images/boot.png"</span>));</span><br><span class="line">    javaMailSender.send(mimeMessage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-4多个邮件接收人"><a href="#3-4多个邮件接收人" class="headerlink" title="3.4多个邮件接收人"></a>3.4多个邮件接收人</h2><p> 我们可以以下面的两种形式来将邮件发送给多个接收者：<br>    数组。<br>    多个参数。</p>
+<pre><code>// 邮件接受者
+mailMessage.sendMsg(&quot;&quot;,&quot;&quot;,&quot;&quot;);
+mailMessage.sendMsg(new String[]{&quot;&quot;,&quot;&quot;});</code></pre><h2 id="3-5抄送"><a href="#3-5抄送" class="headerlink" title="3.5抄送"></a>3.5抄送</h2><p>添加抄送者与添加接受者的方式差不多，区别在于方法名，添加抄送者方法为setCc()：<br>同样也可以添加一个，或以数组和多参数形式添加多个抄送者：</p>
+<pre><code>// 邮件抄送者
+mailMessage.setCc(&quot;&quot;);
+mailMessage.setCc(&quot;&quot;,&quot;&quot;);
+mailMessage.setCc(new String[]{&quot;&quot;,&quot;&quot;});</code></pre><h1 id="5-整合thymeleaf模板"><a href="#5-整合thymeleaf模板" class="headerlink" title="5.整合thymeleaf模板"></a>5.整合thymeleaf模板</h1><h2 id="5-1-自定义邮件内容实体，编写可重复使用的工具类"><a href="#5-1-自定义邮件内容实体，编写可重复使用的工具类" class="headerlink" title="5.1 自定义邮件内容实体，编写可重复使用的工具类"></a>5.1 自定义邮件内容实体，编写可重复使用的工具类</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 引入lomhok --&gt; </span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailEntity</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 发件人</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.mail.username&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String mailFrom;</span><br><span class="line">    <span class="comment">// 收件人</span></span><br><span class="line">    <span class="keyword">private</span> String[] mailTo;</span><br><span class="line">    <span class="comment">// 抄送</span></span><br><span class="line">    <span class="keyword">private</span> String[] mailToCC;</span><br><span class="line">    <span class="comment">// 邮件标题</span></span><br><span class="line">    <span class="keyword">private</span> String subject;</span><br><span class="line">    <span class="comment">// 邮件内容</span></span><br><span class="line">    <span class="keyword">private</span> String context;</span><br><span class="line">    <span class="comment">// 附件</span></span><br><span class="line">    <span class="keyword">private</span> String[] attachFiles;</span><br><span class="line">    <span class="comment">// 邮件模板变量</span></span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;String, Object&gt; variableMap;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MailEntity</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MailEntity</span><span class="params">(String subject, String context, String[] mailToCC, String[] mailTo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.subject = subject;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">        <span class="keyword">this</span>.mailTo = mailTo;</span><br><span class="line">        <span class="keyword">this</span>.mailToCC = mailToCC;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MailEntity</span><span class="params">(String subject, String context, String[] mailToCC, String[] mailTo, String[] attachFiles)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.subject = subject;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">        <span class="keyword">this</span>.mailTo = mailTo;</span><br><span class="line">        <span class="keyword">this</span>.mailToCC = mailToCC;</span><br><span class="line">        <span class="keyword">this</span>.attachFiles = attachFiles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MimeMessage <span class="title">convertTo</span><span class="params">(MimeMessage message)</span> <span class="keyword">throws</span> MessagingException </span>&#123;</span><br><span class="line">        MimeMessageHelper messageHelper = <span class="keyword">new</span> MimeMessageHelper(message, <span class="keyword">true</span>);</span><br><span class="line">        messageHelper.setSubject(getSubject());</span><br><span class="line">        messageHelper.setFrom(mailFrom);</span><br><span class="line">        messageHelper.setTo(getMailTo());</span><br><span class="line">        <span class="comment">// 这里后面的true，用来让context内容以html格式进行展示，如果不设置，里面的链接会被作为普通字符串展示</span></span><br><span class="line">        messageHelper.setText(getContext(), <span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 添加附件</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != attachFiles) &#123;</span><br><span class="line">            <span class="keyword">for</span> (String filePath : attachFiles) &#123;</span><br><span class="line">                FileSystemResource fileSystemResource = <span class="keyword">new</span> FileSystemResource(<span class="keyword">new</span> File(filePath));</span><br><span class="line">                String fileName = filePath.substring(filePath.lastIndexOf(File.separator));</span><br><span class="line">                messageHelper.addAttachment(fileName, fileSystemResource);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SimpleMailMessage <span class="title">convertTo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SimpleMailMessage mailMessage = <span class="keyword">new</span> SimpleMailMessage();</span><br><span class="line">        <span class="comment">// 邮件发送者，这里不能随便填写，必须是真实的发送邮件的邮箱名称</span></span><br><span class="line">        mailMessage.setFrom(mailFrom);</span><br><span class="line">        <span class="comment">// 邮件接受者</span></span><br><span class="line">        mailMessage.setTo(getMailTo());</span><br><span class="line">        <span class="comment">// 邮件主题</span></span><br><span class="line">        mailMessage.setSubject(getSubject());</span><br><span class="line">        <span class="comment">// 邮件内容</span></span><br><span class="line">        mailMessage.setText(getContext());</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(getMailToCC())) &#123;</span><br><span class="line">            mailMessage.setCc(getMailToCC());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mailMessage;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JavaMailSender mailSender;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMsg</span><span class="params">(MailEntity record)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 发送邮件</span></span><br><span class="line">        mailSender.send(record.convertTo());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-pom-xml中引入依赖thymeleaf"><a href="#5-2-pom-xml中引入依赖thymeleaf" class="headerlink" title="5.2 pom.xml中引入依赖thymeleaf"></a>5.2 pom.xml中引入依赖thymeleaf</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-MailService工具类中增加使用邮件模板的方法"><a href="#5-3-MailService工具类中增加使用邮件模板的方法" class="headerlink" title="5.3 MailService工具类中增加使用邮件模板的方法"></a>5.3 MailService工具类中增加使用邮件模板的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JavaMailSender mailSender;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TemplateEngine templateEngine;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMsgByThymeleafTemplate</span><span class="params">(MailEntity record)</span> </span>&#123;</span><br><span class="line">        MimeMessage mimeMessage = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 添加正文（使用thymeleaf模板）</span></span><br><span class="line">            Context context = <span class="keyword">new</span> Context();</span><br><span class="line">            context.setVariables(record.getVariableMap());</span><br><span class="line">            String content = <span class="keyword">this</span>.templateEngine.process(<span class="string">"email"</span>, context);</span><br><span class="line">            record.setContext(content);</span><br><span class="line"></span><br><span class="line">            mimeMessage = mailSender.createMimeMessage();</span><br><span class="line">            mimeMessage = record.convertTo(mimeMessage);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 发送邮件</span></span><br><span class="line">            mailSender.send(mimeMessage);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (MessagingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-邮件模板"><a href="#5-4-邮件模板" class="headerlink" title="5.4 邮件模板"></a>5.4 邮件模板</h2><p>html的邮件模板路径放置在classpath:resources/templates/email.html<br>测试类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> xmlns:th=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Email&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;img src=<span class="string">'cid:boot'</span>&gt;</span><br><span class="line">&lt;h4&gt;&lt;span th:text="$&#123;subject&#125;"&gt;hello &lt;/span&gt;   &lt;/h4&gt;</span><br><span class="line">&lt;i&gt;&lt;span th:text="$&#123;content&#125;"&gt;Hello world!&lt;/span&gt;&lt;/i&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">SpringBootTest</span></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SpringbootTeach5ApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MailService mailService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] mailTo = &#123;<span class="string">"407737980@qq.com"</span>&#125;;</span><br><span class="line">        String[] mailTo2 = &#123;<span class="string">"407737980@qq.com"</span>, <span class="string">"407737980@qq.com"</span>&#125;;</span><br><span class="line">        <span class="comment">// 抄送</span></span><br><span class="line">        String[] mailToCC = &#123;<span class="string">"407737980@qq.com"</span>&#125;;</span><br><span class="line">        String[] attachFiles = &#123;<span class="string">"C:\\Users\\indexvc\\Downloads\\微信截图_20200115221555.png"</span>&#125;;</span><br><span class="line">   </span><br><span class="line">sendMsgByThymeleafTemplate</span><br><span class="line">        <span class="comment">// 发送带简单html格式正文的邮件</span></span><br><span class="line">        mailService.sendHtmlMsg(<span class="keyword">new</span> MailEntity(<span class="string">"hello "</span>, <span class="string">"&lt;a href=\"#\"&gt;链接&lt;/a&gt;"</span>, <span class="keyword">null</span>, mailTo));</span><br><span class="line">        <span class="comment">// 发送带附件的邮件</span></span><br><span class="line">        mailService.sendHtmlMsg(<span class="keyword">new</span> MailEntity(<span class="string">"hello "</span>, <span class="string">"hello !This is a test! "</span>, <span class="keyword">null</span>, mailTo, attachFiles));</span><br><span class="line">        <span class="comment">// 发送多个人收件人</span></span><br><span class="line">        mailService.sendMsg(<span class="keyword">new</span> MailEntity(<span class="string">"hello "</span>, <span class="string">"hello !This is a test! "</span>, mailToCC, mailTo2));</span><br><span class="line">        <span class="comment">// 发送单个人收件人</span></span><br><span class="line">        mailService.sendMsg(<span class="keyword">new</span> MailEntity(<span class="string">"hello "</span>, <span class="string">"hello !This is a test! "</span>, <span class="keyword">null</span>, mailTo));</span><br><span class="line">        <span class="comment">// 抄送某人</span></span><br><span class="line">        mailService.sendMsg(<span class="keyword">new</span> MailEntity(<span class="string">"hello "</span>, <span class="string">"hello !This is a test! "</span>, mailToCC, mailTo));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行测试类，发送结果如下<br><img src="https://img-blog.csdnimg.cn/20200311154906438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="6-整合Freemarker模板"><a href="#6-整合Freemarker模板" class="headerlink" title="6. 整合Freemarker模板"></a>6. 整合Freemarker模板</h1><h2 id="6-1-引入pom-xml"><a href="#6-1-引入pom-xml" class="headerlink" title="6.1 引入pom.xml"></a>6.1 引入pom.xml</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="6-2-配置properties文件"><a href="#6-2-配置properties文件" class="headerlink" title="6.2 配置properties文件"></a>6.2 配置properties文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">#配置模板路径，默认是templates，可以不用配置</span><br><span class="line">spring.freemarker.charset= UTF-<span class="number">8</span></span><br><span class="line">spring.freemarker.allow-request-override= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.cache= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.expose-request-attributes= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.expose-session-attributes= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.content-type= text/html</span><br><span class="line">spring.freemarker.template-loader-path= classpath:/templates/</span><br><span class="line">spring.freemarker.expose-spring-macro-helpers= <span class="keyword">false</span></span><br><span class="line">spring.freemarker.check-template-location= <span class="keyword">true</span></span><br><span class="line">spring.freemarker.enabled= <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-编写邮件模板html"><a href="#6-3-编写邮件模板html" class="headerlink" title="6.3 编写邮件模板html"></a>6.3 编写邮件模板html</h2><p>html的邮件模板路径放置在classpath:resources/templates/email.ftl</p>
+<h2 id="6-4-整合freemark模板引擎的方法"><a href="#6-4-整合freemark模板引擎的方法" class="headerlink" title="6.4 整合freemark模板引擎的方法"></a>6.4 整合freemark模板引擎的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Configuration freeMarkerConfiguration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMsgByFreemarkerTemplate</span><span class="params">(MailEntity record)</span> </span>&#123;</span><br><span class="line">    record.setMailFrom(mailFrom);</span><br><span class="line">    MimeMessage mimeMessage = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过指定模板名获取FreeMarker模板实例</span></span><br><span class="line">        Template t = freeMarkerConfiguration.getTemplate(<span class="string">"email.ftl"</span>, <span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">// FreeMarker通过Map传递动态数据</span></span><br><span class="line">        <span class="comment">// 注意动态数据的key和模板标签中指定的属性相匹配</span></span><br><span class="line">        <span class="comment">// 解析模板并替换动态数据，最终code将替换模板文件中的$&#123;code&#125;标签。</span></span><br><span class="line">        String mailText = FreeMarkerTemplateUtils.processTemplateIntoString(t, record.getVariableMap());</span><br><span class="line">        record.setContext(mailText);</span><br><span class="line">        mimeMessage = mailSender.createMimeMessage();</span><br><span class="line">        mimeMessage = record.convertTo(mimeMessage);</span><br><span class="line">        <span class="comment">// 发送邮件</span></span><br><span class="line">        mailSender.send(mimeMessage);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行测试类，发送即可</p>
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach5" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach5</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SpringBoot入门之五 整合邮件服务 </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-05, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2021-02-06, 18:05:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/" title="SpringBoot入门之五 整合邮件服务 ">https://xiaolaifeng.gitee.io/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot','#mybatis','#pagehelper','#paginationhelper','#generator','#博客','#hexo','#python','#pycharm',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

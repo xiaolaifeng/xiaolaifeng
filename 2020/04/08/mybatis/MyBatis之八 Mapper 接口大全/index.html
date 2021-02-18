@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MyBatis之八 Mapper 接口大全  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot , mybatis , pagehelper , paginationhelper , generator ">
+  <meta name="description" content="MyBatis之八 Mapper 接口大全  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/categories/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:18:46.000Z">
+<meta property="article:modified_time" content="2021-02-06T10:05:17.956Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mybatis">mybatis<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">pagehelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">paginationhelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">generator</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">pycharm</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="python "
+           href="/2021/02/02/python/PyCharm%20%E7%9C%9F%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
+           data-tag="python,pycharm"
+           data-author="" >
+            <span class="post-title" title="PyCharm 真永久激活方法与插件使用教程 ">PyCharm 真永久激活方法与插件使用教程 </span>
+            <span class="post-date" title="2021-02-02 16:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/02/python/Python%E5%AE%89%E8%A3%85/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python下载安装教程 ">Python下载安装教程 </span>
+            <span class="post-date" title="2021-02-02 12:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/01/python/python%20%E8%AF%BE%E7%A8%8B%E4%BD%93%E7%B3%BB/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python 课程体系 ">Python 课程体系 </span>
+            <span class="post-date" title="2021-02-01 16:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="blog "
+           href="/2021/02/01/blog/%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag="博客,hexo"
+           data-author="" >
+            <span class="post-title" title="构建个人博客">构建个人博客</span>
+            <span class="post-date" title="2021-02-01 12:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/09/mybatis/MyBatis%E4%B9%8B%E4%B9%9D%20PaginationHelper%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之九 PaginationHelper的使用方法 ">MyBatis之九 PaginationHelper的使用方法 </span>
+            <span class="post-date" title="2020-04-09 16:00:35">2020/04/09</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之八 Mapper 接口大全 ">MyBatis之八 Mapper 接口大全 </span>
+            <span class="post-date" title="2020-04-08 16:00:35">2020/04/08</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/07/mybatis/MyBatis%E4%B9%8B%E4%B8%83%203.3.0%20%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E5%86%85%E5%AE%B9%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之七 3.3.0 版本新增内容使用文档 ">MyBatis之七 3.3.0 版本新增内容使用文档 </span>
+            <span class="post-date" title="2020-04-07 16:00:35">2020/04/07</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/06/mybatis/MyBatis%E4%B9%8B%E5%85%AD%20%E5%BC%80%E5%8F%91%E8%87%AA%E5%B7%B1%E7%9A%84%E9%80%9A%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之六 开发自己的通用接口方法 ">MyBatis之六 开发自己的通用接口方法 </span>
+            <span class="post-date" title="2020-04-06 16:00:35">2020/04/06</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/05/mybatis/MyBatis%E4%B9%8B%E4%BA%94%20%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之五 高级用法 ">MyBatis之五 高级用法 </span>
+            <span class="post-date" title="2020-04-05 16:00:35">2020/04/05</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/04/mybatis/MyBatis%E4%B9%8B%E5%9B%9B%20UUID%20%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之四 UUID 简单示例 ">MyBatis之四 UUID 简单示例 </span>
+            <span class="post-date" title="2020-04-04 16:00:35">2020/04/04</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/03/mybatis/MyBatis%E4%B9%8B%E4%B8%89%20%E8%87%AA%E5%AE%9A%E4%B9%89MyBatis%20Generator%20%E6%8F%92%E4%BB%B6/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之三 自定义MyBatis Generator 插件 ">MyBatis之三 自定义MyBatis Generator 插件 </span>
+            <span class="post-date" title="2020-04-03 16:00:35">2020/04/03</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/02/mybatis/MyBatis%E4%B9%8B%E4%BA%8C%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之二使用通用Mapper ">MyBatis之二使用通用Mapper </span>
+            <span class="post-date" title="2020-04-02 16:00:35">2020/04/02</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/01/mybatis/MyBatis%E4%B9%8B%E4%B8%80%E9%9B%86%E6%88%90%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之一集成通用Mapper ">MyBatis之一集成通用Mapper </span>
+            <span class="post-date" title="2020-04-01 16:00:35">2020/04/01</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-mybatis/MyBatis之八 Mapper 接口大全" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">MyBatis之八 Mapper 接口大全 </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="mybatis">mybatis</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+            <a class="color3">mybatis</a>
+            
+            <a class="color1">pagehelper</a>
+            
+            <a class="color2">paginationhelper</a>
+            
+            <a class="color5">generator</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-02-06 18:05:17'>2020-04-08 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础接口"><span class="toc-text">基础接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generic-组合接口"><span class="toc-text">Generic 组合接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#countByExample-TE-example"><span class="toc-text">countByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deleteByExample-TE-example"><span class="toc-text">deleteByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#insert-T-record"><span class="toc-text">insert(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#insertSelective-T-record"><span class="toc-text">insertSelective(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List-selectByExample-TE-example"><span class="toc-text">List selectByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List-selectByExampleWithBLOBs-TE-example"><span class="toc-text">List selectByExampleWithBLOBs(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExampleSelective-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExampleSelective(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExample-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExample(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExampleWithBLOBs-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExampleWithBLOBs(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#T-selectByPrimaryKey-PK-id"><span class="toc-text">T selectByPrimaryKey(PK id);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByPrimaryKeySelective-T-record"><span class="toc-text">updateByPrimaryKeySelective(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByPrimaryKey-T-record"><span class="toc-text">updateByPrimaryKey(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deleteByPrimaryKey-PK-id"><span class="toc-text">deleteByPrimaryKey(PK id);</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#base-组合接口"><span class="toc-text">base 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CRUD-组合接口"><span class="toc-text">CRUD 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Example-组合接口"><span class="toc-text">Example 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Condition-组合接口"><span class="toc-text">Condition 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RowBounds-组合接口"><span class="toc-text">RowBounds 组合接口</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础接口"><span class="toc-text">基础接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generic-组合接口"><span class="toc-text">Generic 组合接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#countByExample-TE-example"><span class="toc-text">countByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deleteByExample-TE-example"><span class="toc-text">deleteByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#insert-T-record"><span class="toc-text">insert(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#insertSelective-T-record"><span class="toc-text">insertSelective(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List-selectByExample-TE-example"><span class="toc-text">List selectByExample(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List-selectByExampleWithBLOBs-TE-example"><span class="toc-text">List selectByExampleWithBLOBs(TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExampleSelective-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExampleSelective(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExample-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExample(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByExampleWithBLOBs-Param-“record”-T-record-Param-“example”-TE-example"><span class="toc-text">updateByExampleWithBLOBs(@Param(“record”) T record, @Param(“example”) TE example);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#T-selectByPrimaryKey-PK-id"><span class="toc-text">T selectByPrimaryKey(PK id);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByPrimaryKeySelective-T-record"><span class="toc-text">updateByPrimaryKeySelective(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updateByPrimaryKey-T-record"><span class="toc-text">updateByPrimaryKey(T record);</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deleteByPrimaryKey-PK-id"><span class="toc-text">deleteByPrimaryKey(PK id);</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#base-组合接口"><span class="toc-text">base 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CRUD-组合接口"><span class="toc-text">CRUD 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Example-组合接口"><span class="toc-text">Example 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Condition-组合接口"><span class="toc-text">Condition 组合接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RowBounds-组合接口"><span class="toc-text">RowBounds 组合接口</span></a></li></ol></div>(MyBatis之八 Mapper 接口大全)<br>Mapper3接口有两种形式，一种是提供了一个方法的接口。还有一种是不提供方法，但是继承了多个单方法的接口，一般是某类方法的集合。</p>
+<p>例如SelectMapper<T>是一个单方法的接口，BaseSelectMapper<T>是一个继承了4个基础查询方法的接口。</p>
+<h1 id="基础接口"><a href="#基础接口" class="headerlink" title="基础接口"></a>基础接口</h1><p>Select</p>
+<p>接口：SelectMapper<T><br>方法：List<T> select(T record);<br>说明：根据实体中的属性值进行查询，查询条件使用等号</p>
+<p>接口：SelectByPrimaryKeyMapper<T><br>方法：T selectByPrimaryKey(Object key);<br>说明：根据主键字段进行查询，方法参数必须包含完整的主键属性，查询条件使用等号</p>
+<p>接口：SelectAllMapper<T><br>方法：List<T> selectAll();<br>说明：查询全部结果，select(null)方法能达到同样的效果</p>
+<p>接口：SelectOneMapper<T><br>方法：T selectOne(T record);<br>说明：根据实体中的属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号</p>
+<p>接口：SelectCountMapper<T><br>方法：int selectCount(T record);<br>说明：根据实体中的属性查询总数，查询条件使用等号</p>
+<p>Insert</p>
+<p>接口：InsertMapper<T><br>方法：int insert(T record);<br>说明：保存一个实体，null的属性也会保存，不会使用数据库默认值</p>
+<p>接口：InsertSelectiveMapper<T><br>方法：int insertSelective(T record);<br>说明：保存一个实体，null的属性不会保存，会使用数据库默认值</p>
+<p>Update</p>
+<p>接口：UpdateByPrimaryKeyMapper<T><br>方法：int updateByPrimaryKey(T record);<br>说明：根据主键更新实体全部字段，null值会被更新</p>
+<p>接口：UpdateByPrimaryKeySelectiveMapper<T><br>方法：int updateByPrimaryKeySelective(T record);<br>说明：根据主键更新属性不为null的值</p>
+<p>Delete</p>
+<p>接口：DeleteMapper<T><br>方法：int delete(T record);<br>说明：根据实体属性作为条件进行删除，查询条件使用等号</p>
+<p>接口：DeleteByPrimaryKeyMapper<T><br>方法：int deleteByPrimaryKey(Object key);<br>说明：根据主键字段进行删除，方法参数必须包含完整的主键属性</p>
+<h1 id="Generic-组合接口"><a href="#Generic-组合接口" class="headerlink" title="Generic 组合接口"></a>Generic 组合接口</h1><hr>
+<h2 id="countByExample-TE-example"><a href="#countByExample-TE-example" class="headerlink" title="countByExample(TE example);"></a>countByExample(TE example);</h2><p>说明： 根据Example条件进行查询总数</p>
+<h2 id="deleteByExample-TE-example"><a href="#deleteByExample-TE-example" class="headerlink" title="deleteByExample(TE example);"></a>deleteByExample(TE example);</h2><p>说明： 根据Example条件进行删除</p>
+<h2 id="insert-T-record"><a href="#insert-T-record" class="headerlink" title="insert(T record);"></a>insert(T record);</h2><p>说明： 保存一个实体，null的属性也会保存，不会使用数据库默认值</p>
+<h2 id="insertSelective-T-record"><a href="#insertSelective-T-record" class="headerlink" title="insertSelective(T record);"></a>insertSelective(T record);</h2><p>说明： 保存一个实体，null的属性不会保存，会使用数据库默认值</p>
+<h2 id="List-selectByExample-TE-example"><a href="#List-selectByExample-TE-example" class="headerlink" title="List selectByExample(TE example);"></a>List<T> selectByExample(TE example);</h2><p>说明： 根据Example条件进行查询 ，忽略text字段类型</p>
+<h2 id="List-selectByExampleWithBLOBs-TE-example"><a href="#List-selectByExampleWithBLOBs-TE-example" class="headerlink" title="List selectByExampleWithBLOBs(TE example);"></a>List<T> selectByExampleWithBLOBs(TE example);</h2><p>说明： 根据Example条件进行查询，包括text字段类型</p>
+<h2 id="updateByExampleSelective-Param-“record”-T-record-Param-“example”-TE-example"><a href="#updateByExampleSelective-Param-“record”-T-record-Param-“example”-TE-example" class="headerlink" title="updateByExampleSelective(@Param(“record”) T record, @Param(“example”) TE example);"></a>updateByExampleSelective(@Param(“record”) T record, @Param(“example”) TE example);</h2><p>说明： 根据Example条件进行更新实体，null的属性不会更新，忽略text类型的字段</p>
+<h2 id="updateByExample-Param-“record”-T-record-Param-“example”-TE-example"><a href="#updateByExample-Param-“record”-T-record-Param-“example”-TE-example" class="headerlink" title="updateByExample(@Param(“record”) T record, @Param(“example”) TE example);"></a>updateByExample(@Param(“record”) T record, @Param(“example”) TE example);</h2><p>说明： 根据Example条件进行更新实体，null的属性会更新为null</p>
+<h2 id="updateByExampleWithBLOBs-Param-“record”-T-record-Param-“example”-TE-example"><a href="#updateByExampleWithBLOBs-Param-“record”-T-record-Param-“example”-TE-example" class="headerlink" title="updateByExampleWithBLOBs(@Param(“record”) T record, @Param(“example”) TE example);"></a>updateByExampleWithBLOBs(@Param(“record”) T record, @Param(“example”) TE example);</h2><p>说明：  根据Example条件进行更新实体，null的属性不会更新，包含text等类型的字段</p>
+<h2 id="T-selectByPrimaryKey-PK-id"><a href="#T-selectByPrimaryKey-PK-id" class="headerlink" title="T selectByPrimaryKey(PK id);"></a>T selectByPrimaryKey(PK id);</h2><p>说明：  根据主键条件进行查询单条实体</p>
+<h2 id="updateByPrimaryKeySelective-T-record"><a href="#updateByPrimaryKeySelective-T-record" class="headerlink" title="updateByPrimaryKeySelective(T record);"></a>updateByPrimaryKeySelective(T record);</h2><p>说明： 根据主键条件进行更新单条实体，null的属性不会更新</p>
+<h2 id="updateByPrimaryKey-T-record"><a href="#updateByPrimaryKey-T-record" class="headerlink" title="updateByPrimaryKey(T record);"></a>updateByPrimaryKey(T record);</h2><p>说明： 根据主键条件进行更新单条实体，null的属性会更新</p>
+<h2 id="deleteByPrimaryKey-PK-id"><a href="#deleteByPrimaryKey-PK-id" class="headerlink" title="deleteByPrimaryKey(PK id);"></a>deleteByPrimaryKey(PK id);</h2><p>说明： 根据主键条件进行删除</p>
+<hr>
+<h1 id="base-组合接口"><a href="#base-组合接口" class="headerlink" title="base 组合接口"></a>base 组合接口</h1><p>接口：BaseSelectMapper<T><br>方法：包含上面Select的4个方法</p>
+<p>接口：BaseInsertMapper<T><br>方法：包含上面Insert的2个方法</p>
+<p>接口：BaseUpdateMapper<T><br>方法：包含上面Update的2个方法</p>
+<p>接口：BaseDeleteMapper<T><br>方法：包含上面Delete的2个方法</p>
+<h1 id="CRUD-组合接口"><a href="#CRUD-组合接口" class="headerlink" title="CRUD 组合接口"></a>CRUD 组合接口</h1><p>接口：BaseMapper<T><br>方法：继承了base组合接口中的4个组合接口，包含完整的CRUD方法</p>
+<p>Example 方法</p>
+<p>接口：SelectByExampleMapper<T><br>方法：List<T> selectByExample(Object example);<br>说明：根据Example条件进行查询<br>重点：这个查询支持通过Example类指定查询列，通过selectProperties方法指定查询列</p>
+<p>接口：SelectCountByExampleMapper<T><br>方法：int selectCountByExample(Object example);<br>说明：根据Example条件进行查询总数</p>
+<p>接口：UpdateByExampleMapper<T><br>方法：int updateByExample(@Param(“record”) T record, @Param(“example”) Object example);<br>说明：根据Example条件更新实体record包含的全部属性，null值会被更新</p>
+<p>接口：UpdateByExampleSelectiveMapper<T><br>方法：int updateByExampleSelective(@Param(“record”) T record, @Param(“example”) Object example);<br>说明：根据Example条件更新实体record包含的不是null的属性值</p>
+<p>接口：DeleteByExampleMapper<T><br>方法：int deleteByExample(Object example);<br>说明：根据Example条件删除数据</p>
+<h1 id="Example-组合接口"><a href="#Example-组合接口" class="headerlink" title="Example 组合接口"></a>Example 组合接口</h1><p>接口：ExampleMapper<T><br>方法：包含上面Example中的5个方法</p>
+<p>Condition 方法</p>
+<p>Condition方法和Example方法作用完全一样，只是为了避免Example带来的歧义，提供的的Condition方法</p>
+<p>接口：SelectByConditionMapper<T><br>方法：List<T> selectByCondition(Object condition);<br>说明：根据Condition条件进行查询</p>
+<p>接口：SelectCountByConditionMapper<T><br>方法：int selectCountByCondition(Object condition);<br>说明：根据Condition条件进行查询总数</p>
+<p>接口：UpdateByConditionMapper<T><br>方法：int updateByCondition(@Param(“record”) T record, @Param(“example”) Object condition);<br>说明：根据Condition条件更新实体record包含的全部属性，null值会被更新</p>
+<p>接口：UpdateByConditionSelectiveMapper<T><br>方法：int updateByConditionSelective(@Param(“record”) T record, @Param(“example”) Object condition);<br>说明：根据Condition条件更新实体record包含的不是null的属性值</p>
+<p>接口：DeleteByConditionMapper<T><br>方法：int deleteByCondition(Object condition);<br>说明：根据Condition条件删除数据</p>
+<h1 id="Condition-组合接口"><a href="#Condition-组合接口" class="headerlink" title="Condition 组合接口"></a>Condition 组合接口</h1><p>接口：ConditionMapper<T><br>方法：包含上面Condition中的5个方法</p>
+<p>RowBounds</p>
+<p>默认为内存分页，可以配合PageHelper实现物理分页</p>
+<p>接口：SelectRowBoundsMapper<T><br>方法：List<T> selectByRowBounds(T record, RowBounds rowBounds);<br>说明：根据实体属性和RowBounds进行分页查询</p>
+<p>接口：SelectByExampleRowBoundsMapper<T><br>方法：List<T> selectByExampleAndRowBounds(Object example, RowBounds rowBounds);<br>说明：根据example条件和RowBounds进行分页查询</p>
+<p>接口：SelectByConditionRowBoundsMapper<T><br>方法：List<T> selectByConditionAndRowBounds(Object condition, RowBounds rowBounds);<br>说明：根据example条件和RowBounds进行分页查询，该方法和selectByExampleAndRowBounds完全一样，只是名字改成了Condition</p>
+<h1 id="RowBounds-组合接口"><a href="#RowBounds-组合接口" class="headerlink" title="RowBounds 组合接口"></a>RowBounds 组合接口</h1><p>接口：RowBoundsMapper<T><br>方法：包含上面RowBounds中的前两个方法，不包含selectByConditionAndRowBounds</p>
+<p>special 特殊接口</p>
+<p>这些接口针对部分数据库设计，不是所有数据库都支持</p>
+<p>接口：InsertListMapper<T><br>方法：int insertList(List<T> recordList);<br>说明：批量插入，支持批量插入的数据库可以使用，例如MySQL,H2等，另外该接口限制实体包含id属性并且必须为自增列</p>
+<p>接口：InsertUseGeneratedKeysMapper<T><br>方法：int insertUseGeneratedKeys(T record);<br>说明：插入数据，限制为实体包含id属性并且必须为自增列，实体配置的主键策略无效</p>
+<p>MySQL 专用</p>
+<p>接口：MySqlMapper<T><br>继承方法：int insertList(List<T> recordList);<br>继承方法：int insertUseGeneratedKeys(T record);<br>说明：该接口不包含方法，继承了special中的InsertListMapper<T>和InsertUseGeneratedKeysMapper<T></p>
+<p>SqlServer 专用</p>
+<p>由于sqlserver中插入自增主键时，不能使用null插入，不能在insert语句中出现id。</p>
+<p>注意SqlServer的两个特有插入方法都使用了</p>
+<p>@Options(useGeneratedKeys = true, keyProperty = “id”)</p>
+<p>这就要求表的主键为id，且为自增，如果主键不叫id可以看高级教程中的解决方法。</p>
+<p>另外这俩方法和base中的插入方法重名，不能同时存在！</p>
+<p>如果某种数据库和SqlServer这里类似，也可以使用这些接口（需要先测试）。</p>
+<p>接口：InsertMapper<br>方法：int insert(T record);<br>说明：插入数据库，null值也会插入，不会使用列的默认值</p>
+<p>接口：InsertSelectiveMapper<br>方法：int insertSelective(T record);<br>说明：插入数据库，null的属性不会保存，会使用数据库默认值</p>
+<p>接口：SqlServerMapper<br>说明：这是上面两个接口的组合接口。</p>
+<p>Ids 接口</p>
+<p>通过操作ids字符串进行操作，ids 如 “1,2,3” 这种形式的字符串，这个方法要求实体类中有且只有一个带有@Id注解的字段，否则会抛出异常。</p>
+<p>接口：SelectByIdsMapper<br>方法：List<T> selectByIds(String ids)<br>说明：根据主键字符串进行查询，类中只有存在一个带有@Id注解的字段</p>
+<p>接口：DeleteByIdsMapper<br>方法：int deleteByIds(String ids)<br>说明：根据主键字符串进行删除，类中只有存在一个带有@Id注解的字段</p>
+<p>Ids 组合接口</p>
+<p>接口：IdsMapper<T><br>方法：包含上面Ids中的前两个方法</p>
+<p>Mapper<T> 接口</p>
+<p>接口：Mapper<T><br>该接口兼容Mapper2.x版本，继承了BaseMapper<T>, ExampleMapper<T>, RowBoundsMapper<T>三个组合接口。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>MyBatis之八 Mapper 接口大全 </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-04-08, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2021-02-06, 18:05:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/" title="MyBatis之八 Mapper 接口大全 ">https://xiaolaifeng.gitee.io/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot','#mybatis','#pagehelper','#paginationhelper','#generator','#博客','#hexo','#python','#pycharm',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

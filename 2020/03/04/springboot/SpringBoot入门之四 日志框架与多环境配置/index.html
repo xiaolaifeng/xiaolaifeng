@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot入门之四 日志框架与多环境配置  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="SpringBoot入门之四 日志框架与多环境配置  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/categories/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:18:46.000Z">
+<meta property="article:modified_time" content="2021-02-06T10:05:17.956Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mybatis">mybatis<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">pagehelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">paginationhelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">generator</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">pycharm</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="python "
+           href="/2021/02/02/python/PyCharm%20%E7%9C%9F%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
+           data-tag="python,pycharm"
+           data-author="" >
+            <span class="post-title" title="PyCharm 真永久激活方法与插件使用教程 ">PyCharm 真永久激活方法与插件使用教程 </span>
+            <span class="post-date" title="2021-02-02 16:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/02/python/Python%E5%AE%89%E8%A3%85/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python下载安装教程 ">Python下载安装教程 </span>
+            <span class="post-date" title="2021-02-02 12:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/01/python/python%20%E8%AF%BE%E7%A8%8B%E4%BD%93%E7%B3%BB/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python 课程体系 ">Python 课程体系 </span>
+            <span class="post-date" title="2021-02-01 16:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="blog "
+           href="/2021/02/01/blog/%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag="博客,hexo"
+           data-author="" >
+            <span class="post-title" title="构建个人博客">构建个人博客</span>
+            <span class="post-date" title="2021-02-01 12:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/09/mybatis/MyBatis%E4%B9%8B%E4%B9%9D%20PaginationHelper%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之九 PaginationHelper的使用方法 ">MyBatis之九 PaginationHelper的使用方法 </span>
+            <span class="post-date" title="2020-04-09 16:00:35">2020/04/09</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之八 Mapper 接口大全 ">MyBatis之八 Mapper 接口大全 </span>
+            <span class="post-date" title="2020-04-08 16:00:35">2020/04/08</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/07/mybatis/MyBatis%E4%B9%8B%E4%B8%83%203.3.0%20%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E5%86%85%E5%AE%B9%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之七 3.3.0 版本新增内容使用文档 ">MyBatis之七 3.3.0 版本新增内容使用文档 </span>
+            <span class="post-date" title="2020-04-07 16:00:35">2020/04/07</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/06/mybatis/MyBatis%E4%B9%8B%E5%85%AD%20%E5%BC%80%E5%8F%91%E8%87%AA%E5%B7%B1%E7%9A%84%E9%80%9A%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之六 开发自己的通用接口方法 ">MyBatis之六 开发自己的通用接口方法 </span>
+            <span class="post-date" title="2020-04-06 16:00:35">2020/04/06</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/05/mybatis/MyBatis%E4%B9%8B%E4%BA%94%20%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之五 高级用法 ">MyBatis之五 高级用法 </span>
+            <span class="post-date" title="2020-04-05 16:00:35">2020/04/05</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/04/mybatis/MyBatis%E4%B9%8B%E5%9B%9B%20UUID%20%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之四 UUID 简单示例 ">MyBatis之四 UUID 简单示例 </span>
+            <span class="post-date" title="2020-04-04 16:00:35">2020/04/04</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/03/mybatis/MyBatis%E4%B9%8B%E4%B8%89%20%E8%87%AA%E5%AE%9A%E4%B9%89MyBatis%20Generator%20%E6%8F%92%E4%BB%B6/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之三 自定义MyBatis Generator 插件 ">MyBatis之三 自定义MyBatis Generator 插件 </span>
+            <span class="post-date" title="2020-04-03 16:00:35">2020/04/03</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/02/mybatis/MyBatis%E4%B9%8B%E4%BA%8C%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之二使用通用Mapper ">MyBatis之二使用通用Mapper </span>
+            <span class="post-date" title="2020-04-02 16:00:35">2020/04/02</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/01/mybatis/MyBatis%E4%B9%8B%E4%B8%80%E9%9B%86%E6%88%90%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之一集成通用Mapper ">MyBatis之一集成通用Mapper </span>
+            <span class="post-date" title="2020-04-01 16:00:35">2020/04/01</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/SpringBoot入门之四 日志框架与多环境配置" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SpringBoot入门之四 日志框架与多环境配置 </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-02-06 18:05:17'>2020-03-04 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合日志log4j-slf4j"><span class="toc-text">1. 整合日志log4j+slf4j</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#logging-path"><span class="toc-text">logging.path</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何设置日志级别"><span class="toc-text">如何设置日志级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#logging-pattern-console"><span class="toc-text">logging.pattern.console</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-多环境配置：本地开发、测试环境、生成环境"><span class="toc-text">2. 多环境配置：本地开发、测试环境、生成环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Validator检验器"><span class="toc-text">3. Validator检验器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-自定义注释"><span class="toc-text">4. 自定义注释</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-了解已有的注解"><span class="toc-text">4.1 了解已有的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-创建自定义注解"><span class="toc-text">4.2 创建自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-定义切面类"><span class="toc-text">4.3 定义切面类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-使用自定义注解"><span class="toc-text">4.4 使用自定义注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合日志log4j-slf4j"><span class="toc-text">1. 整合日志log4j+slf4j</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#logging-path"><span class="toc-text">logging.path</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何设置日志级别"><span class="toc-text">如何设置日志级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#logging-pattern-console"><span class="toc-text">logging.pattern.console</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-多环境配置：本地开发、测试环境、生成环境"><span class="toc-text">2. 多环境配置：本地开发、测试环境、生成环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Validator检验器"><span class="toc-text">3. Validator检验器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-自定义注释"><span class="toc-text">4. 自定义注释</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-了解已有的注解"><span class="toc-text">4.1 了解已有的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-创建自定义注解"><span class="toc-text">4.2 创建自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-定义切面类"><span class="toc-text">4.3 定义切面类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-使用自定义注解"><span class="toc-text">4.4 使用自定义注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></div>(SpringBoot入门之四 日志框架与多环境配置)</p>
+<h1 id="1-整合日志log4j-slf4j"><a href="#1-整合日志log4j-slf4j" class="headerlink" title="1. 整合日志log4j+slf4j"></a>1. 整合日志log4j+slf4j</h1><p>为了保证服务的高可用，发现问题一定要即使，解决问题一定要迅速，所以生产环境一旦出现问题，预警系统就会通过邮件、短信甚至电话的方式实施多维轰炸模式，确保相关负责人不错过每一个可能的bug。</p>
+<p>预警系统判断疑似bug大部分源于日志。比如某个微服务接口由于各种原因导致频繁调用出错，此时调用端会捕获这样的异常并打印ERROR级别的日志，当该错误日志达到一定次数出现的时候，就会触发报警。</p>
+<p>try {</p>
+<pre><code>调用某服务</code></pre><p>} catch(Exception e) {</p>
+<pre><code>LOG.error(&quot;错误信息&quot;, e);</code></pre><p>}</p>
+<p>所以日志至关重要，这篇就来介绍下在Spring Boot如何配置日志。<br>Spring Boot默认日志系统</p>
+<p>Spring Boot默认使用LogBack日志系统，如果不需要更改为其他日志系统如Log4j2等，则无需多余的配置，LogBack默认将日志打印到控制台上。</p>
+<p>如果要使用LogBack，原则上是需要添加dependency依赖的</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure>
+<p>但是因为新建的Spring Boot项目一般都会引用spring-boot-starter或者spring-boot-starter-web，而这两个起步依赖中都已经包含了对于spring-boot-starter-logging的依赖，所以，无需额外添加依赖。</p>
+<p> 如果需要做一些定制的日志配置比如将日志存储到文件等应该如何配置，下面就通过几个小问题来看看Spring Boot下是如何解决这些问题的。<br>如何在项目中打印日志</p>
+<p>新建一个配置类LogConfig，注入一个Bean，并在方法中打印日志</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.jackie.springbootdemo.model.Person;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOG = LoggerFactory.getLogger(LogConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> Person <span class="title">logMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        LOG.info(<span class="string">"==========print log=========="</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>运行SpringbootTeach4Application，可以看到控制台的日志</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___<span class="string">'_ __ _ _(_)_ __  __ _ \ \ \ \</span></span><br><span class="line"><span class="string">( ( )\___ | '</span>_ | <span class="string">'_| | '</span>_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  <span class="string">'  |____| .__|_| |_|_| |_\__, | / / / /</span></span><br><span class="line"><span class="string"> =========|_|==============|___/=/_/_/_/</span></span><br><span class="line"><span class="string"> :: Spring Boot ::        (v2.0.0.RELEASE)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2020-03-09 15:46:27.643  INFO 88964 --- [           main] s.s.teach4.SpringbootTeach4Application   : Starting SpringbootTeach4Application on SHDN049 with PID 88964 (E:\workspace-train\springboot-teach4\target\classes started by indexvc in E:\workspace-train\springboot-teach4)</span></span><br><span class="line"><span class="string">2020-03-09 15:46:27.646  INFO 88964 --- [           main] s.s.teach4.SpringbootTeach4Application   : No active profile set, falling back to default profiles: default</span></span><br><span class="line"><span class="string">2020-03-09 15:46:27.779  INFO 88964 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@3e77a1ed: startup date [Mon Mar 09 15:46:27 CST 2020]; root of context hierarchy</span></span><br><span class="line"><span class="string">2020-03-09 15:46:28.190  INFO 88964 --- [           main] sample.springboot.teach4.LogConfig       : ==========print log==========</span></span><br><span class="line"><span class="string">2020-03-09 15:46:29.089  INFO 88964 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup</span></span><br><span class="line"><span class="string">2020-03-09 15:46:29.099  INFO 88964 --- [           main] s.s.teach4.SpringbootTeach4Application   : Started SpringbootTeach4Application in 2.325 seconds (JVM running for 3.42)</span></span><br><span class="line"><span class="string">2020-03-09 15:46:29.101  INFO 88964 --- [       Thread-2] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@3e77a1ed: startup date [Mon Mar 09 15:46:27 CST 2020]; root of context hierarchy</span></span><br><span class="line"><span class="string">2020-03-09 15:46:29.102  INFO 88964 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown</span></span><br></pre></td></tr></table></figure>
+
+<p>Spring Boot默认的日志级别为INFO，这里打印的是INFO级别的日志所以可以显示。</p>
+<p>很多开发者在日常写private static final Logger LOG = LoggerFactory.getLogger(LogConfig.class);总觉得后面的LogConfig.class可有可无，因为随便写个其他类也不会报错，但是准确编写class信息能够提供快速定位日志的效率。</p>
+<p>我们看到打印的日志内容左侧就是对应的类名称，这个是通过private static final Logger LOG = LoggerFactory.getLogger(LogConfig.class);实现的。</p>
+<p>如果将LogConfig.class换成xxx.class，输出日志就会显示对应的xxx类名。这样声明的好处就是方便定位日志。<br>如何将日志信息存储到文件</p>
+<p>在本机环境，我们习惯在控制台看日志，但是线上我们还是要通过将日志信息保存到日志文件中，查询日志文件即可。</p>
+<p>那么应该如何配置才能将日志信息保存到文件呢？</p>
+<p>在我们创建的springboot-teach4项目中，resources目录下有个application.properties文件（如果是application.yml文件也是同样的道理，只是采用的不同的编写风格而已）。添加如下配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8081</span></span><br><span class="line">#它们俩不会同时生效， 只配置其中一个就好了。</span><br><span class="line">#logging.path=E://workspace-train//springboot-teach4//2</span><br><span class="line">logging.file=E:<span class="comment">//workspace-train//springboot-teach4//1//springbootdemo.log</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="logging-path"><a href="#logging-path" class="headerlink" title="logging.path"></a>logging.path</h2><p>该属性用来配置日志文件的路径</p>
+<p>logging.file</p>
+<p>该属性用来配置日志文件名，如果该属性不配置，默认文件名为spring.log</p>
+<p>运行SpringBootDemoApplication</p>
+<p>可以看到在指定路径下生成了springbootdemo.log文件，该文件内容和控制台打印内容一致。</p>
+<p>如果注释logging.file=springbootdemo.log则生成默认文件名spring.log</p>
+<h2 id="如何设置日志级别"><a href="#如何设置日志级别" class="headerlink" title="如何设置日志级别"></a>如何设置日志级别</h2><p>日志级别总共有TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL ，且级别是逐渐提供，如果日志级别设置为INFO，则意味TRACE和DEBUG级别的日志都看不到。</p>
+<p>上例中我们打印了一个INFO级别的日志，因为Spring Boot默认级别就是INFO，如果我们改为WARN，是否还能看到这行日志信息。</p>
+<p>logging.level</p>
+<p>该属性用于配置日志级别。</p>
+<p>在applicaition.properties中添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">logging.level.root=warn</span><br></pre></td></tr></table></figure>
+
+<p>这里是用的root级别，即项目的所有日志，我们也可以使用package级别，即指定包下使用相应的日志级别，下面再看。</p>
+<p>启动SpringBootDemoApplication</p>
+<p>你没看错，这个项目是成功启动了，但是几乎没有内容，这是因为之前打印的日志级别都是INFO，这里设置为WARN，所以INFO级别的日志都不显示。</p>
+<p>这里我们可以改动root还是INFO级别，将指定包下的日志级别设置为WARN</p>
+<p>logging.level.root=INFO</p>
+<p>logging.level.com.jackie.springbootdemo.config=WARN</p>
+<p>启动SpringBootDemoApplication</p>
+<p>可以看到除了LogConfig类中的INFO级别的日志没有打印出来，其他的INFO级别的日志都正常输出了。<br>如何定制自己的日志格式</p>
+<p>在application.properties中添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logging.pattern.console=%d&#123;yyyy/MM/dd-HH:mm:ss&#125; [%thread] %-<span class="number">5l</span>evel %logger- %msg%n </span><br><span class="line">logging.pattern.file=%d&#123;yyyy/MM/dd-HH:mm&#125; [%thread] %-<span class="number">5l</span>evel %logger- %msg%n</span><br></pre></td></tr></table></figure>
+
+<h2 id="logging-pattern-console"><a href="#logging-pattern-console" class="headerlink" title="logging.pattern.console"></a>logging.pattern.console</h2><p>该属性用于定制日志输出格式。</p>
+<p>上述配置的编码中，对应符号的含义如下</p>
+<p>%d{HH:mm:ss.SSS}——日志输出时间</p>
+<p>%thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用</p>
+<p>%-5level——日志级别，并且使用5个字符靠左对齐</p>
+<p>%logger- ——日志输出者的名字</p>
+<p>%msg——日志消息</p>
+<p>%n——平台的换行符</p>
+<p>启动SpringBootDemoApplication</p>
+<p>限于篇幅，还有相关特性，这里不一一陈述了。</p>
+<h1 id="2-多环境配置：本地开发、测试环境、生成环境"><a href="#2-多环境配置：本地开发、测试环境、生成环境" class="headerlink" title="2. 多环境配置：本地开发、测试环境、生成环境"></a>2. 多环境配置：本地开发、测试环境、生成环境</h1><p>在实际的项目上，一般会分三种环境dev、test、prod来方便我们的开发和部署，要求我们在开发的时候可以方便地进行环境的切换，又要满足在发布版本的时候可以尽可能减少测试人员的配置。<br>Spring Profile<br>多环境</p>
+<p>为了实现多环境配置，我们可以在本地开发的时候在Resource文件夹下新建不同环境的配置文件，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200309163017549.png" alt="在这里插入图片描述"></p>
+<p>这时候我们只需要在主配置文件application.properties文件使用spring.profiles.active = dev/test/prod来进行不同环境的切换</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.profiles.active = dev</span><br><span class="line"> #加载dev配置文件</span><br></pre></td></tr></table></figure>
+
+<p>经过上述步骤，我们即可在本地开发时根据不同的环境进行测试。<br>主配置文件与不同环境的配置文件</p>
+<p>Spring Profile有一个特性即可以在application.properties配置通用的内容，在application-dev.properties文件中配置不同文件的差异化配置，这样可以精简我们的配置文件。配置如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 主配置文件主要用来存放公共设置，不受环境配置影响</span><br><span class="line">spring.profiles.active = @profile.active@ #此处由maven的环境选择决定</span><br><span class="line">spring.server.context-path = /server </span><br><span class="line"># 指定访问资源的根路径</span><br><span class="line">server.port=<span class="number">8081</span></span><br></pre></td></tr></table></figure>
+
+<p>dev配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 主要用来存放不同环境差异化配置，包括ftp地址、数据库连接等</span><br><span class="line">spring.datasource.username= root</span><br><span class="line">spring.datasource.password= </span><br><span class="line">spring.datasource.url= localhost:<span class="number">3307</span>/springboot?useUnicode=<span class="keyword">true</span>&amp;characterEncoding=utf8</span><br><span class="line">spring.datasource.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>= com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
+
+<p>上述解决方案虽然可以解决我们的环境问题，但是不够优雅，还有一些值得优化的地方，比如打包出的配置文件有四个、每次需要手动修改主配置文件的环境信息等。<br>Maven Profile<br>Profile配置</p>
+<p>Maven 也提供了 Profile 支持，它允许我们在 pom.xml 中定义多个 Profile ，每个 profile 可以指定自己的一些配置、依赖、触发条件等。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;profiles&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">        &lt;id&gt;dev&lt;/id&gt;</span><br><span class="line">        &lt;activation&gt;</span><br><span class="line">            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">        &lt;/activation&gt;</span><br><span class="line">        &lt;properties&gt;</span><br><span class="line">            &lt;profile.active&gt;dev&lt;/profile.active&gt;</span><br><span class="line">        &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">        &lt;id&gt;prod&lt;/id&gt;</span><br><span class="line">        &lt;properties&gt;</span><br><span class="line">            &lt;profile.active&gt;prod&lt;/profile.active&gt;</span><br><span class="line">        &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">&lt;/profiles&gt;</span><br></pre></td></tr></table></figure>
+
+<p>按照上述的配置，我们配置了dev/test/prod三种配置并默认选择dev环境。<br>资源过滤</p>
+<p>在进行打包的时候，我们并不需要把dev或者test等配置文件打包进行，所有我们在打包的时候进行如下配置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">        &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                &lt;!--先排除所有的配置文件--&gt;</span><br><span class="line">                &lt;excludes&gt;</span><br><span class="line">                    &lt;exclude&gt;application*.properties&lt;/exclude&gt;</span><br><span class="line">                &lt;/excludes&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                &lt;!--引入所需环境的配置文件--&gt;</span><br><span class="line">                &lt;filtering&gt;true&lt;/filtering&gt;</span><br><span class="line">                &lt;includes&gt;</span><br><span class="line">                    &lt;include&gt;application.properties&lt;/include&gt;</span><br><span class="line">                    &lt;include&gt;application-$&#123;profile.active&#125;.properties&lt;/include&gt;</span><br><span class="line">                &lt;/includes&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">        &lt;/resources&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;classifier&gt;exec&lt;/classifier&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>主要是分为两个步骤：</p>
+<pre><code>先排除所有的配置文件
+引入我们所需要的配置文件，根据${profile.active}来动态指定</code></pre><p>从上面的配置文件可以看出，我们引入了两个配置文件，一个是主配置文件(application.properties)，一个是实际环境(application-dev.properties)的配置文件,但是到这里还没有结束。我们知道主配置文件的dev/test/prod在没有使用Maven Profile的时候，我们是需要手动修改的，但是使用Maven Profile之后，我们可以把这个工作交给maven去做。</p>
+<p>在application.properties进行下面的修改：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">spring.profiles.active = @profile.active@ #此处由maven的环境选择决定</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以完全把配置文件的指定和生成交给maven。<br>Spring Profile与Maven Profile具体使用</p>
+<p>配置如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 主配置文件主要用来存放公共设置，不受环境配置影响</span><br><span class="line">spring.profiles.active = @profile.active@ #此处由maven的环境选择决定</span><br><span class="line">spring.server.context-path = /server </span><br><span class="line"># 指定访问资源的根路径</span><br><span class="line">server.port=<span class="number">8081</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="3-Validator检验器"><a href="#3-Validator检验器" class="headerlink" title="3. Validator检验器"></a>3. Validator检验器</h1><p>应用在执行业务逻辑之前，必须通过校验保证接受到的输入数据是合法正确的，但很多时候同样的校验出现了多次，在不同的层，不同的方法上，导致代码冗余，浪费时间，违反DRY原则。</p>
+<pre><code>每一个控制器都要校验
+过多的校验参数会导致代码太长
+代码的复用率太差，同样的代码如果出现多次，在业务越来越复杂的情况下，维护成本呈指数上升。</code></pre><p>可以考虑把校验的代码封装起来，来解决出现的这些问题。<br>JSR-303</p>
+<p>JSR-303是Java为Bean数据合法性校验提供的标准框架，它定义了一套可标注在成员变量，属性方法上的校验注解。<br>Hibernate Validation提供了这套标准的实现，在我们引入Spring Boot web starter或者Spring boot starter validation的时候，默认会引入Hibernate Validation。<br>用法实例</p>
+<p>说了这么多废话，上代码。</p>
+<pre><code>引入SpringBoot项目</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.hibernate.validator&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line"> &lt;!-- 引入lomhok --&gt; </span><br><span class="line"> &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<pre><code>编写校验对象</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 名字不允许为空，并且名字的长度在2位到30位之间</span></span><br><span class="line">    <span class="comment">// 如果名字的长度校验不通过，那么提示错误信息</span></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="meta">@Size</span>(min = <span class="number">2</span>, max = <span class="number">30</span>, message = <span class="string">"请检查名字的长度是否有问题"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">// 不允许为空，并且密码的最小值为6</span></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="meta">@Min</span>(<span class="number">6</span>)</span><br><span class="line">    <span class="meta">@Size</span>(min = <span class="number">6</span>, max = <span class="number">12</span>, message = <span class="string">"请检查密码的长度是否有问题"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>创建控制器 </code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 要校验的参数前，加上@Valid注解</span></span><br><span class="line">    <span class="comment">// 2. 紧随其后的，跟上一个BindingResult来存储校验信息</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/test1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">test1</span><span class="params">(@Valid User user, BindingResult bindingResult)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果检验出了问题，就返回错误信息</span></span><br><span class="line">        <span class="comment">// 这里我们返回的是全部的错误信息，实际中可根据bindingResult的方法根据需要返回自定义的信息。</span></span><br><span class="line">        <span class="comment">// 通常的解决方案为：JSR-303 + 全局ExceptionHandler</span></span><br><span class="line">        <span class="keyword">if</span> (bindingResult.hasErrors()) &#123;</span><br><span class="line">            <span class="keyword">return</span> bindingResult.getAllErrors();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"OK"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>运行应用</code></pre><p>稍作演示下运行的结果，可以看出校验框架已经生效了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200309171621512.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="4-自定义注释"><a href="#4-自定义注释" class="headerlink" title="4. 自定义注释"></a>4. 自定义注释</h1><h2 id="4-1-了解已有的注解"><a href="#4-1-了解已有的注解" class="headerlink" title="4.1 了解已有的注解"></a>4.1 了解已有的注解</h2> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123;</span><br><span class="line">		<span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter<span class="class">.<span class="keyword">class</span>),</span></span><br><span class="line"><span class="class">		@<span class="title">Filter</span>(<span class="title">type</span> </span>= FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter<span class="class">.<span class="keyword">class</span>) &#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">SpringBootApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@AliasFor</span>(annotation = EnableAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line">	Class&lt;?&gt;[] exclude() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@AliasFor</span>(annotation = EnableAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line">	String[] excludeName() default &#123;&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@AliasFor</span>(annotation = ComponentScan<span class="class">.<span class="keyword">class</span>, <span class="title">attribute</span> </span>= <span class="string">"basePackages"</span>)</span><br><span class="line">	String[] scanBasePackages() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@AliasFor</span>(annotation = ComponentScan<span class="class">.<span class="keyword">class</span>, <span class="title">attribute</span> </span>= <span class="string">"basePackageClasses"</span>)</span><br><span class="line">	Class&lt;?&gt;[] scanBasePackageClasses() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是RequestMapping的注解，这个注解里包含了4个其他的注解，我大致介绍一下（其实源码里面说的很清楚）：<br>1.@Target<br>定义注解修饰的目标，比如@RequestMapping 就是用来修饰方法和类<br>2.@Retention<br>定义注解的生命周期，分为以下三种：</p>
+<p>/<em>源码级别</em>/<br>// Annotations are to be discarded by the compiler.<br>SOURCE，<br>/<em>编译期级别</em>/<br>/<em>Annotations are to be recorded in the class file by the compiler，but need not be retained by the VM at run time.  This is the defaultbehavior.</em>/<br>CLASS,<br>/<em>运行期级别</em>/<br>/*Annotations are to be recorded in the class file by the compiler and retained by the VM at run time, so they may be read reflectively.<br>RUNTIME</p>
+<p>3.@Documented<br>定义注解会被javadoc或者其他类似工具文档化<br>4.@Mapping<br>定义注解是一个web mapping annotation</p>
+<h2 id="4-2-创建自定义注解"><a href="#4-2-创建自定义注解" class="headerlink" title="4.2 创建自定义注解"></a>4.2 创建自定义注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyFirstAnnotation &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-定义切面类"><a href="#4-3-定义切面类" class="headerlink" title="4.3 定义切面类"></a>4.3 定义切面类</h2><p>创建完自定义注解后，很显然的思路是如何让注解起作用。这里以输出日志的注解为例，当用自定义注解来修饰方法时，我们期望在方法执行的前后输出日志记录，那么我们必须采用AOP（面向切面编程）的思想，理所当然地，我们需要定义切面类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(HelloAnnotation)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">annotationPointcut</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"annotationPointcut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforePointcut</span><span class="params">(JoinPoint joinPoint)</span> </span>&#123;</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();</span><br><span class="line">        Method method = methodSignature.getMethod();</span><br><span class="line">        HelloAnnotation annotation = method.getAnnotation(HelloAnnotation<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        String value = annotation.value();</span><br><span class="line">        System.out.println(<span class="string">"准备"</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After</span>(<span class="string">"annotationPointcut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPointcut</span><span class="params">(JoinPoint joinPoint)</span> </span>&#123;</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();</span><br><span class="line">        Method method = methodSignature.getMethod();</span><br><span class="line">        HelloAnnotation annotation = method.getAnnotation(HelloAnnotation<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        String value = annotation.value();</span><br><span class="line">        System.out.println(<span class="string">"结束"</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点需要关注的是：切点的定义，切点可以定义成execute(public String sayHello()) 的形式，但是这种形式就和咱们的注解不相关了，因此我们采用@annotation(MyFirstAnnotation) 的形式，这样切点就变成了我们自定义注解所修饰的方法</p>
+<h2 id="4-4-使用自定义注解"><a href="#4-4-使用自定义注解" class="headerlink" title="4.4 使用自定义注解"></a>4.4 使用自定义注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@HelloAnnotation</span>(<span class="string">"hello"</span>)</span><br><span class="line">   <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"hello world!"</span>);</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"hello world!"</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>控制台结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">准备hello</span><br><span class="line">hello world!</span><br><span class="line">结束hello</span><br></pre></td></tr></table></figure>
+
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach4" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach4</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SpringBoot入门之四 日志框架与多环境配置 </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-04, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2021-02-06, 18:05:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="SpringBoot入门之四 日志框架与多环境配置 ">https://xiaolaifeng.gitee.io/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot','#mybatis','#pagehelper','#paginationhelper','#generator','#博客','#hexo','#python','#pycharm',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

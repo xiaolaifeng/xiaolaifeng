@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Springboot入门之八 数据缓存之Redis Mongo  | 浮华落定</title>
+  <meta name="keywords" content=" java , springboot ">
+  <meta name="description" content="Springboot入门之八 数据缓存之Redis Mongo  | 浮华落定">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://xiaolaifeng.gitee.io/categories/index.html">
+<meta property="og:site_name" content="浮华落定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T08:18:46.000Z">
+<meta property="article:modified_time" content="2021-02-06T10:05:17.956Z">
+<meta property="article:author" content="Robin jiao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Robin jiao</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="gitee" href="https://gitee.com/xiaolaifeng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gitee"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/818b4f4795d2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/qiufo" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:407737980@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=407737980&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mybatis">mybatis<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/contact-me">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">pagehelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">paginationhelper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">generator</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">pycharm</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="python "
+           href="/2021/02/02/python/PyCharm%20%E7%9C%9F%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
+           data-tag="python,pycharm"
+           data-author="" >
+            <span class="post-title" title="PyCharm 真永久激活方法与插件使用教程 ">PyCharm 真永久激活方法与插件使用教程 </span>
+            <span class="post-date" title="2021-02-02 16:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/02/python/Python%E5%AE%89%E8%A3%85/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python下载安装教程 ">Python下载安装教程 </span>
+            <span class="post-date" title="2021-02-02 12:00:35">2021/02/02</span>
+        </a>
+        
+        <a  class="python "
+           href="/2021/02/01/python/python%20%E8%AF%BE%E7%A8%8B%E4%BD%93%E7%B3%BB/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python 课程体系 ">Python 课程体系 </span>
+            <span class="post-date" title="2021-02-01 16:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="blog "
+           href="/2021/02/01/blog/%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag="博客,hexo"
+           data-author="" >
+            <span class="post-title" title="构建个人博客">构建个人博客</span>
+            <span class="post-date" title="2021-02-01 12:00:35">2021/02/01</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/09/mybatis/MyBatis%E4%B9%8B%E4%B9%9D%20PaginationHelper%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之九 PaginationHelper的使用方法 ">MyBatis之九 PaginationHelper的使用方法 </span>
+            <span class="post-date" title="2020-04-09 16:00:35">2020/04/09</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/08/mybatis/MyBatis%E4%B9%8B%E5%85%AB%20Mapper%20%E6%8E%A5%E5%8F%A3%E5%A4%A7%E5%85%A8/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之八 Mapper 接口大全 ">MyBatis之八 Mapper 接口大全 </span>
+            <span class="post-date" title="2020-04-08 16:00:35">2020/04/08</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/07/mybatis/MyBatis%E4%B9%8B%E4%B8%83%203.3.0%20%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E5%86%85%E5%AE%B9%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之七 3.3.0 版本新增内容使用文档 ">MyBatis之七 3.3.0 版本新增内容使用文档 </span>
+            <span class="post-date" title="2020-04-07 16:00:35">2020/04/07</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/06/mybatis/MyBatis%E4%B9%8B%E5%85%AD%20%E5%BC%80%E5%8F%91%E8%87%AA%E5%B7%B1%E7%9A%84%E9%80%9A%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之六 开发自己的通用接口方法 ">MyBatis之六 开发自己的通用接口方法 </span>
+            <span class="post-date" title="2020-04-06 16:00:35">2020/04/06</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/05/mybatis/MyBatis%E4%B9%8B%E4%BA%94%20%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之五 高级用法 ">MyBatis之五 高级用法 </span>
+            <span class="post-date" title="2020-04-05 16:00:35">2020/04/05</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/04/mybatis/MyBatis%E4%B9%8B%E5%9B%9B%20UUID%20%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之四 UUID 简单示例 ">MyBatis之四 UUID 简单示例 </span>
+            <span class="post-date" title="2020-04-04 16:00:35">2020/04/04</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/03/mybatis/MyBatis%E4%B9%8B%E4%B8%89%20%E8%87%AA%E5%AE%9A%E4%B9%89MyBatis%20Generator%20%E6%8F%92%E4%BB%B6/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之三 自定义MyBatis Generator 插件 ">MyBatis之三 自定义MyBatis Generator 插件 </span>
+            <span class="post-date" title="2020-04-03 16:00:35">2020/04/03</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/02/mybatis/MyBatis%E4%B9%8B%E4%BA%8C%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之二使用通用Mapper ">MyBatis之二使用通用Mapper </span>
+            <span class="post-date" title="2020-04-02 16:00:35">2020/04/02</span>
+        </a>
+        
+        <a  class="mybatis "
+           href="/2020/04/01/mybatis/MyBatis%E4%B9%8B%E4%B8%80%E9%9B%86%E6%88%90%E9%80%9A%E7%94%A8Mapper/"
+           data-tag="java,springboot,mybatis,pagehelper,paginationhelper,generator"
+           data-author="" >
+            <span class="post-title" title="MyBatis之一集成通用Mapper ">MyBatis之一集成通用Mapper </span>
+            <span class="post-date" title="2020-04-01 16:00:35">2020/04/01</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/10/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%8D%81%20%E6%95%B4%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之十 整合搜索引擎 ">springboot入门之十 整合搜索引擎 </span>
+            <span class="post-date" title="2020-03-10 16:00:35">2020/03/10</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/09/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B9%9D%20%E6%B6%88%E6%81%AF%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1RabbitMq%20ActiveMq/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="springboot入门之九 消息异步通信RabbitMq ActiveMq ">springboot入门之九 消息异步通信RabbitMq ActiveMq </span>
+            <span class="post-date" title="2020-03-09 16:00:35">2020/03/09</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="Springboot入门之八 数据缓存之Redis Mongo ">Springboot入门之八 数据缓存之Redis Mongo </span>
+            <span class="post-date" title="2020-03-08 16:00:35">2020/03/08</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/07/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%83%20%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BExcel%20PDF/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之七 文件处理之Excel PDF ">SpringBoot入门之七 文件处理之Excel PDF </span>
+            <span class="post-date" title="2020-03-07 16:00:35">2020/03/07</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/06/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AD%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之六 文件上传 ">SpringBoot入门之六 文件上传 </span>
+            <span class="post-date" title="2020-03-06 16:00:35">2020/03/06</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/05/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%94%20%E6%95%B4%E5%90%88%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之五 整合邮件服务 ">SpringBoot入门之五 整合邮件服务 </span>
+            <span class="post-date" title="2020-03-05 16:00:35">2020/03/05</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/04/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%9B%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之四 日志框架与多环境配置 ">SpringBoot入门之四 日志框架与多环境配置 </span>
+            <span class="post-date" title="2020-03-04 16:00:35">2020/03/04</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/03/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%89%20%E6%95%B4%E5%90%88Mybatis%E5%8F%8A%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之三 整合Mybatis及多数据源 ">SpringBoot入门之三 整合Mybatis及多数据源 </span>
+            <span class="post-date" title="2020-03-03 16:00:35">2020/03/03</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/02/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8C%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之二 多模块构建 ">SpringBoot入门之二 多模块构建 </span>
+            <span class="post-date" title="2020-03-02 16:00:35">2020/03/02</span>
+        </a>
+        
+        <a  class="springboot "
+           href="/2020/03/01/springboot/SpringBoot%E5%85%A5%E9%97%A8%E4%B9%8B%E4%B8%80%20%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE/"
+           data-tag="java,springboot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot入门之一 单体项目 ">SpringBoot入门之一 单体项目 </span>
+            <span class="post-date" title="2020-03-01 16:00:35">2020/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-springboot/springboot入门之八 数据缓存之Redis Mongo" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Springboot入门之八 数据缓存之Redis Mongo </h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="springboot">springboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color1">springboot</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-02-06 18:05:17'>2020-03-08 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合redis"><span class="toc-text">1. 整合redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-单机redis"><span class="toc-text">1.1 单机redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-redis启动器"><span class="toc-text">1.2 redis启动器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-配置redis集群"><span class="toc-text">1.3 配置redis集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-redisTemplate介绍"><span class="toc-text">1.4 redisTemplate介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-redis实战-缓存用户信息"><span class="toc-text">1.5 redis实战 缓存用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合jpa"><span class="toc-text">整合jpa</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-整合mongo"><span class="toc-text">2. 整合mongo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-引入pom依赖"><span class="toc-text">2.1 引入pom依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-定义model"><span class="toc-text">2.2 定义model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-编写持久化类"><span class="toc-text">2.3  编写持久化类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-编写test"><span class="toc-text">2.4 编写test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址-分支mongo"><span class="toc-text">源码地址  分支mongo</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整合redis"><span class="toc-text">1. 整合redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-单机redis"><span class="toc-text">1.1 单机redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-redis启动器"><span class="toc-text">1.2 redis启动器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-配置redis集群"><span class="toc-text">1.3 配置redis集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-redisTemplate介绍"><span class="toc-text">1.4 redisTemplate介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-redis实战-缓存用户信息"><span class="toc-text">1.5 redis实战 缓存用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合jpa"><span class="toc-text">整合jpa</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址"><span class="toc-text">源码地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-整合mongo"><span class="toc-text">2. 整合mongo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-引入pom依赖"><span class="toc-text">2.1 引入pom依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-定义model"><span class="toc-text">2.2 定义model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-编写持久化类"><span class="toc-text">2.3  编写持久化类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-编写test"><span class="toc-text">2.4 编写test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码地址-分支mongo"><span class="toc-text">源码地址  分支mongo</span></a></li></ol></li></ol></div>(springboot入门之八 数据缓存之Redis Mongo)</p>
+<h1 id="1-整合redis"><a href="#1-整合redis" class="headerlink" title="1. 整合redis"></a>1. 整合redis</h1><p>依赖导入</p>
+<p>redis的引用包：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;!--session管理委托给redis--&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">	    &lt;groupId&gt;org.springframework.session&lt;/groupId&gt;</span><br><span class="line">	    &lt;artifactId&gt;spring-session-data-redis&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;!--集群管理使用jedis--&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">	    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-1-单机redis"><a href="#1-1-单机redis" class="headerlink" title="1.1 单机redis"></a>1.1 单机redis</h2><p>配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">server:</span><br><span class="line">   port: <span class="number">8081</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">    redis:</span><br><span class="line"></span><br><span class="line">      ##单机redis  </span><br><span class="line">      # Redis数据库索引（默认为0）  </span><br><span class="line">      database : <span class="number">0</span>  </span><br><span class="line">      # Redis服务器地址  </span><br><span class="line">      host : localhost  </span><br><span class="line">      # Redis服务器连接端口  </span><br><span class="line">      port : <span class="number">6379</span>  </span><br><span class="line">      # Redis服务器连接密码（默认为空）  </span><br><span class="line">      password :   </span><br><span class="line">      # 连接超时时间（毫秒）  </span><br><span class="line">      timeout : <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-2-redis启动器"><a href="#1-2-redis启动器" class="headerlink" title="1.2 redis启动器"></a>1.2 redis启动器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="comment">// session托管给redis</span></span><br><span class="line"><span class="comment">// @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(RedisOperations<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">EnableConfigurationProperties</span>(<span class="title">RedisProperties</span>.<span class="title">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">RedisConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(name = <span class="string">"redisTemplate"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义redis序列化</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> connectionFactory</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"redisTemplate2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title">redisTemplate2</span><span class="params">(RedisConnectionFactory connectionFactory)</span> </span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(connectionFactory);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）</span></span><br><span class="line">        Jackson2JsonRedisSerializer serializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line"></span><br><span class="line">        template.setValueSerializer(serializer);</span><br><span class="line">        <span class="comment">// 使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        template.setHashKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        template.setHashValueSerializer(serializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> StringRedisTemplate <span class="title">stringRedisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">        StringRedisTemplate template = <span class="keyword">new</span> StringRedisTemplate();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-配置redis集群"><a href="#1-3-配置redis集群" class="headerlink" title="1.3 配置redis集群"></a>1.3 配置redis集群</h2><p>配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">    redis:</span><br><span class="line">      # redis.cluster</span><br><span class="line">      cluster:</span><br><span class="line">        nodes: <span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7004</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7000</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7002</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7003</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7005</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.8</span>:<span class="number">7001</span></span><br></pre></td></tr></table></figure>
+<p>增加集群启动器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisClusterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.cluster.nodes&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String clusterNodes;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JedisCluster <span class="title">getJedisCluster</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] cNodes = clusterNodes.split(<span class="string">","</span>);</span><br><span class="line">        Set&lt;HostAndPort&gt; nodes = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="comment">// 分割出集群节点</span></span><br><span class="line">        <span class="keyword">for</span> (String node : cNodes) &#123;</span><br><span class="line">            String[] hp = node.split(<span class="string">":"</span>);</span><br><span class="line">            System.out.println(<span class="string">"clusterNodes------------"</span> + hp[<span class="number">0</span>] + <span class="string">"------"</span> + hp[<span class="number">1</span>]);</span><br><span class="line">            nodes.add(<span class="keyword">new</span> HostAndPort(hp[<span class="number">0</span>], Integer.parseInt(hp[<span class="number">1</span>])));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建集群对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JedisCluster(nodes, <span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-redisTemplate介绍"><a href="#1-4-redisTemplate介绍" class="headerlink" title="1.4 redisTemplate介绍"></a>1.4 redisTemplate介绍</h2><p>RedisTemplate是Spring Data Redis提供给用户的最高级的抽象客户端，用户可直接通过RedisTemplate进行多种操作，那么，我们先来看看RedisTemplate封装了哪些操作。下面这列表是RedisTemplate的继承关系和所有方法（已过滤重载方法，共有81个方法）</p>
+<p>(1) 类继承关系</p>
+<p>//RedisAccessor是RedisTemplate定义普通属性的基类，不直接使用<br>//RedisOperations是指定RedisTemplate实现的Redis connection操作的集合接口<br>//BeanClassLoaderAware是给其实现类是设置类加载器的接口<br>RedisTemplate&lt;K, V&gt; extends RedisAccessor implements RedisOperations&lt;K, V&gt;, BeanClassLoaderAware</p>
+<p>(2) 方法</p>
+<p>//配置默认序列化与反序列化工具类<br>2.afterPropertiesSet<br>//根据参数执行相关operation操作，例如，事务<br>3.execute<br>//执行pipelining流水线相关操作<br>4.executePipelined<br>//执行指定connection连接的相关操作<br>5.executeWithStickyConnection<br>//执行session内的execute方法<br>6.executeSession<br>//创建RedisConnection代理类<br>7.createRedisConnectionProxy<br>//connection连接的预处理<br>8.preProcessConnection<br>//结果的后处理，默认什么都不做<br>9.postProcessResult<br>//是否向RedisCallback暴露本地连接<br>10.isExposeConnection<br>//设置是否向RedisCallback暴露本地连接<br>11.setExposeConnection<br>//12到26都是设置和获取相关序列化工具类<br>12.isEnableDefaultSerializer<br>13.setEnableDefaultSerializer<br>14.getDefaultSerializer<br>15.setDefaultSerializer<br>16.setKeySerializer<br>17.getKeySerializer<br>18.setValueSerializer<br>19.getValueSerializer<br>20.getHashKeySerializer<br>21.setHashKeySerializer<br>22.getHashValueSerializer<br>23.setHashValueSerializer<br>24.getStringSerializer<br>25.setStringSerializer<br>26.setScriptExecutor<br>//27到34为私有方法，不对外提供使用<br>27.rawKey<br>28.rawString<br>29.rawValue<br>30.rawKeys<br>31.deserializeKey<br>32.deserializeMixedResults<br>33.deserializeSet<br>34.convertTupleValues<br>//执行事务<br>35.exec<br>36.execRaw<br>//删除操作<br>37.delete<br>//接触链接<br>38.unlink<br>//查看是否含有指定key<br>39.hasKey<br>40.countExistingKeys<br>//设置过期时间<br>41.expire<br>42.expireAt<br>//转换成字节流并向channel发送message<br>43.convertAndSend<br>//获取过期时间<br>44.getExpire<br>//根据传入的正则表达式返回所有的key<br>46.keys<br>//取消指定key的过期时间<br>47.persist<br>//移动指定的key和index到数据库中<br>48.move<br>//从键空间随机获取一个key<br>49.randomKey<br>//将指定key改成目标key<br>50.rename<br>//key不存在时，将指定key改成目标key<br>51.renameIfAbsent<br>//设置存储在指定key的类型<br>52.type<br>//检索存储在key的值的序列化版本<br>53.dump<br>//执行Redis的restore的命令<br>54.restore<br>//标记事务阻塞的开始<br>55.multi<br>//丢弃所有在multi之后发出的命令<br>56.discard<br>//观察指定key在事务处理开始即multi之后的修改情况<br>57.watch<br>//刷新先前观察的所有key<br>58.unwatch<br>//为key元素排序<br>59.sort<br>//关闭客户端连接<br>60.killClient<br>//请求连接客户端的相关信息和统计数据<br>61.getClientList<br>//更改复制配置到新的master<br>62.slaveOf<br>//将本机更改为master<br>63.slaveOfNoOne<br>//64到79都是获取相对应的操作<br>64.opsForCluster<br>65.opsForGeo<br>66.boundGeoOps<br>67.boundHashOps<br>68.opsForHash<br>69.opsForHyperLogLog<br>70.opsForList<br>71.boundListOps<br>72.boundSetOps<br>73.opsForSet<br>74.opsForStream<br>75.boundStreamOps<br>76.boundValueOps<br>77.opsForValue<br>78.boundZSetOps<br>79.opsForZSet<br>//设置是否支持事务<br>80.setEnableTransactionSupport<br>//设置bean的类加载器<br>81.setBeanClassLoader</p>
+<p>(3)功能介绍</p>
+<p>spring-data-redis的提供了如下功能：</p>
+<pre><code>连接池自动管理，提供了一个高度封装的“RedisTemplate”类
+进行了归类封装,将同一类型操作封装为operation接口
+
+ValueOperations：简单K-V操作
+SetOperations：set类型数据操作
+ZSetOperations：zset类型数据操作
+HashOperations：针对map类型的数据操作
+ListOperations：针对list类型的数据操作
+
+提供了对key的“bound”(绑定)便捷化操作API，可以通过bound封装指定的key，然后进行一系列的操作而无须“显式”的再次指定Key，即BoundKeyOperations：
+
+BoundValueOperations
+BoundSetOperations
+BoundListOperations
+BoundSetOperations
+BoundHashOperations
+
+将事务操作封装，有容器控制。
+针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)
+
+1.JdkSerializationRedisSerializer：POJO对象的存取场景，使用JDK本身序列化机制，将pojo类通过ObjectInputStream/ObjectOutputStream进行序列化操作，最终redis-server中将存储字节序列。是目前最常用的序列化策略。
+
+2.StringRedisSerializer：Key或者value为字符串的场景，根据指定的charset对数据的字节序列编码成string，是“newString(bytes,charset)”和“string.getBytes(charset)”的直接封装。是最轻量级和高效的策略。
+
+3.JacksonJsonRedisSerializer：jackson-json工具提供了javabean与json之间的转换能力，可以将pojo实例序列化成json格式存储在redis中，也可以将json格式的数据转换成pojo实例。因为jackson工具在序列化和反序列化时，需要明确指定Class类型，因此此策略封装起来稍微复杂。
+
+4.OxmSerializer：提供了将javabean与xml之间的转换能力，目前可用的三方支持包括jaxb，apache-xmlbeans；redis存储的数据将是xml工具。不过使用此策略，编程将会有些难度，而且效率最低；不建议使用。【需要spring-oxm模块的支持】</code></pre><p>如果你的数据需要被第三方工具解析，那么数据应该使用StringRedisSerializer而不是JdkSerializationRedisSerializer。</p>
+<p>三.具体使用</p>
+<p>(1) String类型：</p>
+<pre><code>插入操作</code></pre><p>UserInfo markIfFirstSync = new UserInfo();<br>userRedisTemplate.opsForValue().set(CACHE_KEY, markIfFirstSync);</p>
+<pre><code>向redis中某个string类型的key下面插入一个对象。</code></pre><p>批量插入操作<br>public Map&lt;String, OrgRelationInfo&gt; mappingRelationRefresh = new HashMap&lt;&gt;();<br>redisTemplate.opsForValue().multiSet(mappingRelationRefresh);</p>
+<pre><code>获取对象操作</code></pre><p>  userRedisTemplate.opsForValue().get(CACHE_NAME + CACHE_KEY_EXIST_PREFIX);</p>
+<pre><code>从redis中获取某个key下面的某个对象，如果不存在就返回null。</code></pre><p> //批量获取对象操作<br>  List<String> sourceIdList = new ArrayList&lt;&gt;();<br>  List<OrgRelationInfo> orgMappingRelationList = redisTemplate.opsForValue().multiGet(sourceIdList);<br>//从redis中获取多个key下面的多个对象，返回一个List列表，但是即使对应的key下面没有值，这个<strong>value也会返回</strong>，不过是<br>//null，因此要判断是否List都为空，不能够用isEmpty直接判断，而应该一个一个的判断是否为空，才能判断整体为空。</p>
+<p>(2) List类型</p>
+<pre><code>批量插入</code></pre><p>//向redis的某个key下面的list列表里面插入一个list列表，不会去重。<br>List<OrgRelationInfo> remainOrgNodes = new ArrayList&lt;&gt;();<br>redisTemplate.opsForList().leftPushAll(CACHE_KEY, remainOrgNodes);</p>
+<pre><code>批量取出</code></pre><p>//从redis中取出某一个key下面的list列表， 0表示从列表的第0个元素开始取，-1表示直取到倒数第一个元素，也就是整个列表的所有元素都取出来。<br>List<OrgRelationInfo> lastRemainOrgNodeList = redisTemplate.opsForList().range(CACHE_NAME + CACHE_REMAIN_KEY_PREFIX, 0, -1);</p>
+<p>(3) Hash类型</p>
+<pre><code>批量插入</code></pre><p>// 向redis中某个key下面插入key，hash的Map。<br>Map&lt;Long, UserRelationInfo&gt; value = new HashMap&lt;&gt;();<br>userHashRedisTemplate.opsForHash().putAll(KEY, value );</p>
+<p>-单个删除</p>
+<p>//从redis中某个key下面删除掉某个hashkey所在的value。<br>userHashRedisTemplate.opsForHash().delete(key, sourceOrgId);</p>
+<pre><code>单个获取</code></pre><p>//从redis中某个key下面得到这个key对应的hashkey的value值。前一个key只能是String类型，hashKey可以声明为自己需要的类型。<br>userHashRedisTemplate.opsForHash().get(Key， hashKey);</p>
+<pre><code>批量获取</code></pre><p>//从redis中得到某个key下面的所有的hashkey和hashvalue值。<br>Map&lt;Object, Object&gt; userOrgMap = userHashRedisTemplate.opsForHash().entries(getUserNodeCacheKey(syncUserNode.getSourceId()));</p>
+<p>(4) Set类型</p>
+<pre><code>单个插入</code></pre><p>//向redis的某个key下面的set列表里面插入一个元素，回去重，且无序。<br>userRoleSetRedisTemplate.opsForSet().add(KEY, cloudtOrgRoleInfo);</p>
+<pre><code>批量取出</code></pre><p>//从redis的某个key下面得到set集合的所有元素，返回的也是一个Set集合。<br>cloudtOrgRoleSet = userRoleSetRedisTemplate.opsForSet().members(KEY);</p>
+<pre><code>单个删除</code></pre><p>//从redis的某个key下面的set集合中删除掉一个元素。<br>userRoleSetRedisTemplate.opsForSet().remove( KEY, subDeleteOrgRoleUserArray[i]);</p>
+<h2 id="1-5-redis实战-缓存用户信息"><a href="#1-5-redis实战-缓存用户信息" class="headerlink" title="1.5 redis实战 缓存用户信息"></a>1.5 redis实战 缓存用户信息</h2><p>  实现Cookie传值，因为集群开发的话，session值会变，A机  和 B机  的session值一定改变。因此需要种入Cookie值保证用户登录之后不会出现，登录到A机 就只能在A机使用了。一但请求转到B机，就要重新登录了。</p>
+<p>写入Cookie</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeLoginToken</span><span class="params">(HttpServletResponse response, String token)</span> </span>&#123;</span><br><span class="line">      Cookie ck = <span class="keyword">new</span> Cookie(COOKIE_NAME, token);</span><br><span class="line">      ck.setPath(<span class="string">"/"</span>);</span><br><span class="line">      ck.setHttpOnly(<span class="keyword">true</span>);</span><br><span class="line">      ck.setMaxAge(EXPIRE); <span class="comment">// 保存时间</span></span><br><span class="line">      log.info(<span class="string">"write cookie name:&#123;&#125; , cookie vlaue: &#123;&#125;"</span>, ck.getName(), ck.getValue());</span><br><span class="line">      response.addCookie(ck);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>读取Cookie</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readLoginToken</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">    Cookie[] cks = request.getCookies();</span><br><span class="line">    <span class="keyword">if</span> (cks != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (Cookie ck : cks) &#123;</span><br><span class="line">            log.info(<span class="string">"read cookie name:&#123;&#125; , cookie value:&#123;&#125;"</span>, ck.getName(), ck.getValue());</span><br><span class="line">            <span class="keyword">if</span> (ck.getName().toString().equals(COOKIE_NAME)) &#123;</span><br><span class="line">                <span class="keyword">return</span> ck.getValue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除Cookie(用于登出)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delLoginToken</span><span class="params">(HttpServletResponse response, HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        Cookie[] cks = request.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cks != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Cookie ck : cks) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ck.getName().toString().equals(COOKIE_NAME)) &#123;</span><br><span class="line">                    ck.setPath(<span class="string">"/"</span>);</span><br><span class="line">                    ck.setMaxAge(<span class="number">0</span>); <span class="comment">// 0 = del</span></span><br><span class="line">                    log.info(<span class="string">"del cookie name : &#123;&#125; ,cookie vlaue: &#123;&#125;"</span>, ck.getName(), ck.getValue());</span><br><span class="line">                    response.addCookie(ck);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.2 得到Cookie值之后只要把Cookie的值放入到redis里面，设置一样的时间值，就实现了集群登录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String token = UUID.randomUUID().toString();</span></span><br><span class="line">       String token = session.getId(); <span class="comment">// 获取登录 token</span></span><br><span class="line">       Integer expire = CookieUtil.EXPIRE; <span class="comment">// 设置时间</span></span><br><span class="line">       <span class="comment">// 设置 token 至 redis</span></span><br><span class="line">       redisTemplate.opsForValue().set(</span><br><span class="line">           <span class="comment">// String TOKEN_PREFIX = "sample_token_%s";</span></span><br><span class="line">           String.format(RedisConfig.TOKEN_PREFIX, token) <span class="comment">// key</span></span><br><span class="line">           , sellerInfo.getId().toString() <span class="comment">// 关键字 value</span></span><br><span class="line">           , expire, <span class="comment">// 时间</span></span><br><span class="line">           TimeUnit.SECONDS); <span class="comment">// 格式</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">// 设置 token 至 cookie</span></span><br><span class="line">       CookieUtil.writeLoginToken(httpServletResponse, token);</span><br></pre></td></tr></table></figure>
+
+<p>2.3结合使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@RequestMapping</span>(<span class="string">"/do-login"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestParam(<span class="string">"userName"</span>)</span> String userName, @<span class="title">RequestParam</span><span class="params">(<span class="string">"password"</span>)</span> String password,</span></span><br><span class="line"><span class="function">    HttpServletResponse httpServletResponse, HttpSession session) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据库匹配</span></span><br><span class="line">    User sellerInfo = userService.findByUserName(userName); <span class="comment">// 通过关键字 查询用户</span></span><br><span class="line">    <span class="keyword">if</span> (sellerInfo == <span class="keyword">null</span>) &#123; <span class="comment">// 判断用户是否存在</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"用户不存在"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// String token = UUID.randomUUID().toString();</span></span><br><span class="line">    String token = session.getId(); <span class="comment">// 获取登录 token</span></span><br><span class="line">    Integer expire = CookieUtil.EXPIRE; <span class="comment">// 设置时间</span></span><br><span class="line">    <span class="comment">// 设置 token 至 redis</span></span><br><span class="line">    redisTemplate.opsForValue().set(</span><br><span class="line">        <span class="comment">// String TOKEN_PREFIX = "sample_token_%s";</span></span><br><span class="line">        String.format(RedisConfig.TOKEN_PREFIX, token) <span class="comment">// key</span></span><br><span class="line">        , sellerInfo.getId().toString() <span class="comment">// 关键字 value</span></span><br><span class="line">        , expire, <span class="comment">// 时间</span></span><br><span class="line">        TimeUnit.SECONDS); <span class="comment">// 格式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置 token 至 cookie</span></span><br><span class="line">    CookieUtil.writeLoginToken(httpServletResponse, token);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.4登出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/do-logout"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">logout</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Map&lt;String, Object&gt; map)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// cookie查询</span></span><br><span class="line">    String token = CookieUtil.readLoginToken(request);</span><br><span class="line">    <span class="keyword">if</span> (!StringUtils.isEmpty(token)) &#123;</span><br><span class="line">        <span class="comment">// 清除 redis</span></span><br><span class="line">        redisTemplate.opsForValue().getOperations().delete(String.format(RedisConfig.TOKEN_PREFIX, token));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// del cookie</span></span><br><span class="line">        CookieUtil.delLoginToken(response, request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"login"</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>用户信息存储，引入数据库，故整合下jpa</p>
+<h2 id="整合jpa"><a href="#整合jpa" class="headerlink" title="整合jpa"></a>整合jpa</h2><p>配置文件增加jpa</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">spring</span>:</span><br><span class="line">    ## <span class="selector-tag">jsp</span></span><br><span class="line">    <span class="selector-tag">mvc</span>:</span><br><span class="line">      <span class="selector-tag">view</span>: </span><br><span class="line">        prefix: /WEB-INF/jsp/</span><br><span class="line">        <span class="selector-tag">suffix</span>: <span class="selector-class">.jsp</span></span><br><span class="line">     </span><br><span class="line">    <span class="selector-tag">datasource</span>:</span><br><span class="line">      <span class="selector-tag">driver-class-name</span>: <span class="selector-tag">com</span><span class="selector-class">.mysql</span><span class="selector-class">.jdbc</span><span class="selector-class">.Driver</span></span><br><span class="line">      url: jdbc:mysql://localhost:3307/springboot?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</span><br><span class="line">      <span class="selector-tag">hikari</span>: # <span class="selector-tag">springboot</span> 2<span class="selector-class">.0</span> 整合了<span class="selector-tag">hikari</span> ,据说这是目前性能最好的<span class="selector-tag">java</span>数据库连接池</span><br><span class="line">        <span class="selector-tag">username</span>: <span class="selector-tag">root</span></span><br><span class="line">        <span class="selector-tag">password</span>: </span><br><span class="line">    <span class="selector-tag">jpa</span>:</span><br><span class="line">      <span class="selector-tag">show-sql</span>: <span class="selector-tag">true</span></span><br><span class="line">      <span class="selector-tag">database</span>: <span class="selector-tag">mysql</span></span><br><span class="line">      <span class="selector-tag">hibernate</span>:</span><br><span class="line">        <span class="selector-tag">ddl-auto</span>: <span class="selector-tag">update</span></span><br></pre></td></tr></table></figure>
+<p>pom依赖增加jpa</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- jsp --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.embed<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-embed-jasper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		    <span class="comment">&lt;!--&lt;scope&gt;provided&lt;/scope&gt;--&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>model源码</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@Entity</span></span><br><span class="line"><span class="keyword">@Data</span></span><br><span class="line">public class User &#123;</span><br><span class="line">    <span class="keyword">@Id</span></span><br><span class="line">    @GeneratedValue(strategy = GenerationType.IDENTITY)</span><br><span class="line">    private Integer id;</span><br><span class="line">    <span class="selector-tag">private</span> <span class="selector-tag">String</span> <span class="selector-tag">userName</span>;</span><br><span class="line">    <span class="selector-tag">private</span> <span class="selector-tag">String</span> <span class="selector-tag">passWord</span>;</span><br><span class="line">    <span class="selector-tag">private</span> <span class="selector-tag">Integer</span> <span class="selector-tag">age</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>持久化源码</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">public</span> <span class="selector-tag">interface</span> <span class="selector-tag">UserDao</span> <span class="selector-tag">extends</span> <span class="selector-tag">JpaRepository</span>&lt;<span class="selector-tag">User</span>, <span class="selector-tag">Integer</span>&gt; &#123;</span><br><span class="line"></span><br><span class="line">    User findByUserName(String userName);</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">User</span> <span class="selector-tag">findByIdIs</span>(<span class="selector-tag">Integer</span> <span class="selector-tag">id</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动测试下<br><img src="https://img-blog.csdnimg.cn/20200320170713745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FpdWZv,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>输入用户密码登录后查看redis数据<br><img src="https://img-blog.csdnimg.cn/20200320170824820.png" alt="在这里插入图片描述"></p>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach9" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach9</a></p>
+<h1 id="2-整合mongo"><a href="#2-整合mongo" class="headerlink" title="2. 整合mongo"></a>2. 整合mongo</h1><h2 id="2-1-引入pom依赖"><a href="#2-1-引入pom依赖" class="headerlink" title="2.1 引入pom依赖"></a>2.1 引入pom依赖</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">dependency</span>&gt;</span><br><span class="line">          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">      &lt;<span class="selector-tag">dependency</span>&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-定义model"><a href="#2-2-定义model" class="headerlink" title="2.2 定义model"></a>2.2 定义model</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Document</span>(collection = <span class="string">"user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String passWord;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date createTime;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-编写持久化类"><a href="#2-3-编写持久化类" class="headerlink" title="2.3  编写持久化类"></a>2.3  编写持久化类</h2><p>UserDao.java  UserDaoImpl.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">findByUserName</span><span class="params">(String userName)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">save</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(Integer id)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MongoTemplate mongoTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">     * 根据姓名查询用户</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">findByUserName</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 查询的条件</span></span><br><span class="line">        Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"userName"</span>).is(userName));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.findOne(query, User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增信息</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> User</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">save</span><span class="params">(User User)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.save(User);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改信息</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> User</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(User User)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 修改的条件</span></span><br><span class="line">        Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"id"</span>).is(User.getId()));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 修改的内容</span></span><br><span class="line">        Update update = <span class="keyword">new</span> Update();</span><br><span class="line">        update.set(<span class="string">"name"</span>, User.getUserName());</span><br><span class="line"></span><br><span class="line">        mongoTemplate.updateFirst(query, update, User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询所有信息</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.findAll(User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id查询所有信息</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        User byId = mongoTemplate.findById(<span class="number">1</span>, User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        mongoTemplate.remove(byId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-编写test"><a href="#2-4-编写test" class="headerlink" title="2.4 编写test"></a>2.4 编写test</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="keyword">@SpringBootTest</span></span><br><span class="line">public class SpringbootTeach9ApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@Autowired</span></span><br><span class="line">    private UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@Test</span></span><br><span class="line">    public void contextLoads() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@Test</span></span><br><span class="line">    public void addUser() &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        <span class="selector-tag">user</span><span class="selector-class">.setId</span>(1<span class="selector-tag">l</span>);</span><br><span class="line">        <span class="selector-tag">user</span><span class="selector-class">.setUserName</span>("李四");</span><br><span class="line">        <span class="selector-tag">user</span><span class="selector-class">.setPassWord</span>("111111");</span><br><span class="line">        user = userDao.save(user);</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="selector-tag">user</span><span class="selector-class">.getId</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询所有信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">@Test</span></span><br><span class="line">    public void findAll() &#123;</span><br><span class="line">        List&lt;User&gt; all = userDao.findAll();</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="selector-tag">all</span><span class="selector-class">.size</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">@Test</span></span><br><span class="line">    public void update() &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        <span class="selector-tag">user</span><span class="selector-class">.setId</span>(1<span class="selector-tag">l</span>);</span><br><span class="line">        <span class="selector-tag">user</span><span class="selector-class">.setUserName</span>("张三2");</span><br><span class="line">        <span class="selector-tag">userDao</span><span class="selector-class">.update</span>(<span class="selector-tag">user</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">@Test</span></span><br><span class="line">    public void delete() &#123;</span><br><span class="line">        <span class="selector-tag">userDao</span><span class="selector-class">.delete</span>(3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码地址-分支mongo"><a href="#源码地址-分支mongo" class="headerlink" title="源码地址  分支mongo"></a>源码地址  分支mongo</h2><p><a href="https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach9" target="_blank" rel="noopener">https://gitee.com/xiaolaifeng/sample.springboot/tree/master/springboot-teach9</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 407737980@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Springboot入门之八 数据缓存之Redis Mongo </p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="Robin jiao">Robin jiao</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-08, 16:00:35</p>
+    <p><span class="copy-title">最后更新:</span>2021-02-06, 18:05:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/" title="Springboot入门之八 数据缓存之Redis Mongo ">https://xiaolaifeng.gitee.io/2020/03/08/springboot/springboot%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%AB%20%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E4%B9%8BRedis%20Mongo/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Robin jiao</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#java','#springboot','#mybatis','#pagehelper','#paginationhelper','#generator','#博客','#hexo','#python','#pycharm',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
